@@ -1,0 +1,228 @@
+.painel-container {
+  background: #fff;
+  min-height: 100vh;
+  padding: 32px 24px;
+  margin: 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(12,28,69,0.10);
+  padding-top: 0px;
+}
+
+.painel-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.login-logo-container {
+  width: 250px;
+  background: #101b45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+  border-radius: 12px;
+  height: 80px;
+  position: relative;
+  top: -23px;
+}
+.login-logo-small {
+  width: 100%;
+}
+.painel-toolbar {
+  margin-left: auto;
+  max-width: 280px;
+  min-width: 220px;
+  padding: 8px 10px 6px 10px;
+  box-shadow: 0 2px 12px rgba(17, 59, 101, 0.34);
+}
+.painel-toolbar-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #223366;
+  margin-bottom: 2px;
+}
+.painel-toolbar-dates {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.painel-toolbar-date {
+  border: 1px solid #e3e6f0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  color: #223366;
+  background: #f8f9fa;
+  outline: none;
+  transition: border 0.2s;
+  width: 130px;
+}
+.painel-toolbar-date:focus {
+  border: 1.5px solid #1A77D4;
+}
+.painel-cards-metricas {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 0px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #4EB8FF #e3e6f0;
+}
+.painel-cards-metricas::-webkit-scrollbar {
+  height: 7px;
+  background: #e3e6f0;
+  border-radius: 6px;
+}
+.painel-cards-metricas::-webkit-scrollbar-thumb {
+  background: #4EB8FF;
+  border-radius: 6px;
+}
+.painel-card-metrica {
+  background: linear-gradient(90deg, #233e6e 0%, #1A77D4 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(26,119,212,0.10);
+  border: none;
+  flex: 1 1 120px;
+  min-width: 140px;
+  max-width: 250px;
+  padding: 5px 0 5px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s;
+  border-radius: 5px;
+}
+.painel-card-metrica:hover {
+  box-shadow: 0 4px 18px rgba(26,119,212,0.18);
+}
+.painel-card-label {
+  color: #e3e6f0;
+  font-weight: 400;
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+  opacity: 0.95;
+}
+.painel-card-valor {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  display: block;
+}
+.painel-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+  color: #4EB8FF;
+  opacity: 0.95;
+}
+.painel-graficos {
+  background: transparent;
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+.painel-grafico-card {
+  flex: 1 1 0;
+  min-width: 280px;
+  min-height: 220px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  border: 0;
+  box-shadow: 0 2px 12px rgb(17 59 101 / 34%);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+.grafico-placeholder {
+  width: 100%;
+  height: 180px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  color: #223366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+.painel-alertas {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.painel-alerta-card {
+  background: #fffbe6;
+  color: #b8860b;
+  border: 1.5px solid #ffe58f;
+  border-radius: 10px;
+  padding: 18px 32px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(255, 229, 143, 0.10);
+}
+.painel-alerta-card i {
+  font-size: 1.3rem;
+}
+.painel-alerta-card.alerta-vencimento {
+  background: #fff0f0;
+  color: #d32f2f;
+  border-color: #ffb3b3;
+}
+.painel-alerta-card.alerta-lic {
+  background: #e6f7ff;
+  color: #1976d2;
+  border-color: #90caf9;
+}
+
+.card-emitidas {
+  background: linear-gradient(90deg, #233e6e 0%, #4EB8FF 100%);
+}
+.card-aceitas {
+  background: linear-gradient(90deg, #1a4d2e 0%, #28a745 100%);
+}
+.card-analise {
+  background: linear-gradient(90deg, #845331 0%, #ffc107 100%);
+}
+.card-licitacoes {
+  background: linear-gradient(90deg, #291249 0%, #1A77D4 100%);
+}
+.card-sucesso {
+  background: linear-gradient(90deg, #1a2a4d 0%, #1A77D4 100%);
+}
+
+@media (max-width: 900px) {
+  .painel-cards-metricas {
+    gap: 10px;
+  }
+  .painel-card-metrica {
+    min-width: 120px;
+    max-width: 150px;
+    font-size: 0.85rem;
+    padding: 10px 0 8px 0;
+  }
+  .painel-card-label {
+    font-size: 0.85rem;
+  }
+  .painel-card-valor {
+    font-size: 1.05rem;
+  }
+  .painel-card-icon {
+    font-size: 1.1rem;
+  }
+} 

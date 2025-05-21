@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+$azul-principal: #1A77D4;
+$azul-claro: #4EB8FF;
+$azul-escuro: #2A3E66;
+$branco: #FFFFFF;
+$cinza-claro: #F3F3F3;
+$cinza-medio: #B3B3B3;
+$preto-texto: #000000;
+$font-principal: 'Poppins', 'Roboto', Arial, sans-serif;
+
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: $font-principal;
+  background: $cinza-claro;
+}
+
+.login-left {
+  flex: 2;
+  background: linear-gradient(180deg, #18376d 0%, #00113a 100%);
+  color: $branco;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+   box-shadow: 0 4px 32px rgba(12,28,69,0.10);
+}
+
+.login-logo {
+  width: 280px;
+  margin-bottom: 32px;
+}
+
+.login-description {
+  font-size: 1.1rem;
+  margin: 24px 0 32px 0;
+  text-align: center;
+  max-width: 500px;
+}
+
+.login-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px 32px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-areas:
+    "monitor financeiro tecnica comercial"
+    ". superintendencia qsms logistica";
+}
+
+.login-logo-container {
+  width: 100px;
+  overflow: hidden;
+  background: #000505;
+  height: 100px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-card:nth-child(1) { grid-area: monitor; }
+.feature-card:nth-child(2) { grid-area: financeiro; }
+.feature-card:nth-child(3) { grid-area: tecnica; }
+.feature-card:nth-child(4) { grid-area: comercial; }
+.feature-card:nth-child(5),
+.feature-card:nth-child(6),
+.feature-card:nth-child(7) {
+  grid-column: auto;
+}
+
+.feature-card {
+  min-width: 180px;
+  max-width: 240px;
+  min-height: 110px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 18px 12px;
+  border-radius: 14px;
+  border: 1.5px solid #223366;
+  box-shadow: 0 2px 12px rgba(26,119,212,0.10);
+  color: $branco;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  cursor: pointer;
+  i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: $azul-claro;
+    filter: drop-shadow(0 2px 6px #1A77D4);
+  }
+  &:hover {
+    background: linear-gradient(120deg, #233e6e 0%, #1a2a4d 100%);
+    box-shadow: 0 4px 16px rgba(26,119,212,0.16);
+    border: 1.5px solid $azul-claro;
+  }
+}
+
+.login-right {
+  flex: 1;
+  background: $branco;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 340px;
+  box-shadow: -2px 0 16px 0 rgba(0,0,0,0.04);
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 340px;
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-logo-small {
+  width: 317px;
+  margin-bottom: 16px;
+  background: #000;
+  border-radius: 10px;
+  padding-left: 114px;
+  position: relative;
+  top: 6px;
+}
+
+.login-form-desc {
+  color: $cinza-medio;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: $azul-escuro;
+  }
+  input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid $cinza-medio;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    &:focus {
+      border: 1.5px solid $azul-principal;
+    }
+  }
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  .remember-me {
+    font-size: 0.95rem;
+    color: $azul-escuro;
+    input {
+      margin-right: 4px;
+    }
+  }
+  .forgot-password {
+    color: $azul-principal;
+    font-size: 0.95rem;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.login-btn {
+  background: linear-gradient(90deg, $azul-principal 60%, $azul-claro 100%);
+  color: $branco;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(26,119,212,0.08);
+  i {
+    margin-left: 8px;
+  }
+  &:hover {
+    background: linear-gradient(90deg, $azul-claro 60%, $azul-principal 100%);
+    box-shadow: 0 4px 16px rgba(26,119,212,0.12);
+  }
+  white-space: normal;
+  word-break: break-word;
+}
+
+.login-help {
+  margin-top: 18px;
+  font-size: 0.98rem;
+  color: $cinza-medio;
+  a {
+    color: $azul-principal;
+    text-decoration: none;
+    font-weight: 500;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.feature-card-empty {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .login-left, .login-right {
+    flex: unset;
+    width: 100%;
+    min-width: unset;
+    box-shadow: none;
+  }
+  .login-left {
+    padding: 32px 12px 24px 12px;
+  }
+  .login-form-container {
+    max-width: 100vw;
+    padding: 24px 12px;
+  }
+  .login-features {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    max-width: 400px;
+    gap: 18px 12px;
+    grid-template-areas: none;
+  }
+  .feature-card {
+    min-width: 140px;
+    max-width: 100%;
+    height: 90px;
+    padding: 12px 6px;
+    grid-area: unset !important;
+    grid-column: auto !important;
+  }
+} 

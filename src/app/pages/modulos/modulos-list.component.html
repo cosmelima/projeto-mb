@@ -1,0 +1,30 @@
+<div class="modulos_container card">
+  <div class="toolbar">
+    <button class="btn btn-primary" routerLink="/modulos/novo">Novo Módulo</button>
+  </div>
+  <table class="table table-striped table-hover mt-3">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Ícone</th>
+        <th>Label</th>
+        <th>Ordem</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of modulos">
+        <td>{{ m.mod_codigo }}</td>
+        <td>{{ m.mod_nome }}</td>
+        <td>{{ m.mod_icon }}</td>
+        <td>{{ m.mod_label }}</td>
+        <td>{{ m.mod_ordem }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" [routerLink]="['/modulos/editar', m.mod_codigo]">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(m.mod_codigo)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 

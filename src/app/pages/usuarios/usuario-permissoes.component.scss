@@ -1,0 +1,44 @@
+/* Estilos para permissões de usuário */
+
+.permissoes_container {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.permissoes_container .card-header {
+  background: var(--color-btn) !important;
+  color: var(--color-btn-text) !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+body.dark-theme .permissoes_container .card-header {
+  background: var(--color-header-card) !important;
+  color: var(--color-header-card-text) !important;
+}
+
+.form-body {
+  padding: 24px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.modulo-header i,
+.form-check-label i {
+  margin-right: 5px;
+} 

@@ -1,0 +1,70 @@
+<div class="painel-container">
+  <div class="painel-header-row">
+    <div class="login-logo-container">
+      <img class="login-logo-small" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo MBG">
+    </div>
+     
+  </div>
+  
+  <div class="painel-cards painel-cards-metricas">
+    <div class="painel-card-metrica card-emitidas">
+      <i class="bi bi-send painel-card-icon"></i>
+      <span class="painel-card-label">Propostas Emitidas</span>
+      <span class="painel-card-valor">24</span>
+    </div>
+    <div class="painel-card-metrica card-aceitas">
+      <i class="bi bi-check2-circle painel-card-icon"></i>
+      <span class="painel-card-label">Propostas Aceitas</span>
+      <span class="painel-card-valor">8</span>
+    </div>
+    <div class="painel-card-metrica card-analise">
+      <i class="bi bi-search painel-card-icon"></i>
+      <span class="painel-card-label">Propostas em Análise</span>
+      <span class="painel-card-valor">5</span>
+    </div>
+    <div class="painel-card-metrica card-licitacoes">
+      <i class="bi bi-file-earmark-text painel-card-icon"></i>
+      <span class="painel-card-label">Licitações Publicadas</span>
+      <span class="painel-card-valor">3</span>
+    </div>
+    <div class="painel-card-metrica card-sucesso">
+      <i class="bi bi-bar-chart-line painel-card-icon"></i>
+      <span class="painel-card-label">Taxa de Sucesso</span>
+      <span class="painel-card-valor">33%</span>
+    </div>
+  </div>
+  <div class="painel-alertas" style="margin-top: 15px; margin-bottom: 15px;">
+    <div class="painel-alerta-card alerta-vencimento">
+      <i class="bi bi-exclamation-triangle"></i>
+      <span>2 propostas com validade a vencer nos próximos 7 dias</span>
+    </div>
+    <div class="painel-alerta-card alerta-lic">
+      <i class="bi bi-flag"></i>
+      <span>1 licitação aguardando homologação</span>
+    </div>
+  </div>
+  <div class="painel-graficos">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+      <div class="painel-grafico-card">
+        <echarts [options]="propostasStatusOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+      <div class="painel-grafico-card">
+        <echarts [options]="propostasClienteOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+      <div class="painel-grafico-card">
+        <echarts [options]="licitacoesSituacaoOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+    </div>
+  </div>
+  <div class="painel-graficos" style="margin-top: 32px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+      <div class="painel-grafico-card">
+        <apx-chart [series]="apexPropostasMesSeries" [chart]="apexPropostasMesChart" [xaxis]="apexPropostasMesXaxis" [colors]="apexPropostasMesColors" [legend]="apexPropostasMesLegend"></apx-chart>
+      </div>
+      <div class="painel-grafico-card">
+        <apx-chart [series]="apexLicitacoesModalidadeSeries" [chart]="apexLicitacoesModalidadeChart" [xaxis]="apexLicitacoesModalidadeXaxis" [plotOptions]="apexLicitacoesModalidadePlotOptions" [colors]="apexLicitacoesModalidadeColors" [legend]="apexLicitacoesModalidadeLegend" [dataLabels]="apexLicitacoesModalidadeDataLabels"></apx-chart>
+      </div>
+    </div>
+  </div>
+  
+</div> 

@@ -1,0 +1,85 @@
+:host-context(.sidebar-collapsed) aside.main-sidebar,
+.sidebar-collapsed aside.main-sidebar {
+  width: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  border: none !important;
+  padding: 0 !important;
+}
+
+aside.main-sidebar {
+  width: 250px;
+  min-width: 250px;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
+  background: var(--color-bg-card) !important;
+  border-right: 1.5px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.sidebar .nav-link {
+  color: var(--color-text);
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar .nav-link.active, .sidebar .nav-link:hover {
+  background: var(--color-border);
+  color: var(--color-primary);
+}
+
+.sidebar .nav-icon {
+  color: var(--color-primary);
+  margin-right: 4px;
+}
+
+.sidebar .brand-link {
+  background: var(--color-bg-card) !important;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar .user-panel {
+  background: var(--color-bg);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.nav-header-collapsible {
+  user-select: none;
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: transparent;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  transition: background 0.2s;
+}
+
+.nav-header-collapsible:hover {
+  background: var(--color-border);
+}
+
+ul.nav.flex-column.ms-3 {
+  margin-left: 1.5rem !important;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--color-border);
+  background: transparent;
+}
+
+.login-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 250px;
+  background: #101b45;
+}
+
+.login-logo-container img {
+   width: 75%;
+}

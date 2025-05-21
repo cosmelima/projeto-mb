@@ -1,0 +1,77 @@
+/* Estilos para formulário de cliente */ 
+
+.clientes_form_container {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.clientes_form_container .card-header {
+  background: var(--color-btn) !important;
+  color: var(--color-btn-text) !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+body.dark-theme .clientes_form_container .card-header {
+  background: var(--color-header-card) !important;
+  color: var(--color-header-card-text) !important;
+}
+
+.form-control, .form-select, input, select {
+  background: var(--color-bg) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+.btn-success {
+  background: #28a745 !important;
+  color: #fff !important;
+}
+
+.btn-secondary {
+  background: #6c757d !important;
+  color: #fff !important;
+}
+
+.card-header {
+  background: #1A77D4;
+  color: #fff;
+  padding: 18px 24px 12px 24px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  h2 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 600;
+  }
+}
+
+.form-body {
+  padding: 24px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 120px;
+}
+.grow-2 { flex: 2 1 0; }
+.grow-1 { flex: 1 1 0; }
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+} 

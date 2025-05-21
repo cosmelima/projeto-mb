@@ -1,0 +1,21 @@
+.content-wrapper {
+  min-height: calc(100vh - 120px); /* Ajuste conforme altura do header/footer */
+ // background: linear-gradient(120deg, rgb(12, 28, 69) 0%, rgb(41, 18, 73) 100%);
+  padding: 32px 24px;
+  margin-left: 250px; /* Largura do sidebar */
+  transition: margin-left 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+body.sidebar-collapsed .content-wrapper,
+.sidebar-collapsed .content-wrapper {
+  margin-left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    margin-left: 0;
+    padding: 16px 4px;
+  }
+} 
+
+ 

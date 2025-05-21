@@ -1,0 +1,408 @@
+<div class="proposta-tabs">
+  <div class="tab" [class.active]="activeTab === 'criacao'" (click)="activeTab = 'criacao'">Criação de Propostas</div>
+  <div class="tab" [class.active]="activeTab === 'textos'" (click)="activeTab = 'textos'">Textos Padrão</div>
+  <div class="tab" [class.active]="activeTab === 'licitacoes'" (click)="activeTab = 'licitacoes'">Licitações</div>
+</div>
+
+<div *ngIf="activeTab === 'criacao'">
+  <div class="proposta-container">
+    <div class="proposta-header-bar">
+      <h2>Cadastro de Proposta Comercial</h2>
+      <div class="proposta-header-actions">
+        <a href="#" class="header-link" [class.active]="formView === 'form'" (click)="$event.preventDefault(); formView = 'form';">
+          <i class="bi bi-ui-checks"></i> Formulário
+        </a>
+        <a href="#" class="header-link" [class.active]="formView === 'lista'" (click)="$event.preventDefault(); formView = 'lista';">
+          <i class="bi bi-list"></i> Lista
+        </a>
+      </div>
+    </div>
+    <ng-container *ngIf="formView === 'form'">
+      <form class="proposta-form">
+        <div class="form-section">
+          <h3>Dados da Proposta</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dataEmissao">Data de Emissão</label>
+              <input type="date" id="dataEmissao" name="dataEmissao" />
+            </div>
+            <div class="form-group">
+              <label for="numeroProposta">Nº Proposta</label>
+              <input type="text" id="numeroProposta" name="numeroProposta" placeholder="Ex: COM.MB.07/25 Rev. 0" />
+            </div>
+            <div class="form-group">
+              <label for="cliente">Cliente</label>
+              <select id="cliente" name="cliente">
+                <option *ngFor="let c of clientesFake" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="destinatario">Destinatário</label>
+              <input type="text" id="destinatario" name="destinatario" placeholder="Pessoa ou departamento" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="objeto">Objeto do Serviço</label>
+              <input type="text" id="objeto" name="objeto" />
+            </div>
+            <div class="form-group">
+              <label for="local">Local do Serviço</label>
+              <input type="text" id="local" name="local" placeholder="Cidade/UF" />
+            </div>
+            <div class="form-group">
+              <label for="modalidade">Modalidade Contratual</label>
+              <input type="text" id="modalidade" name="modalidade" placeholder="Ex: Empreitada a Preço Unitário" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="descricao">Descrição Técnica do Objeto</label>
+              <textarea id="descricao" name="descricao" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="anexo">Figura/Anexo</label>
+              <input type="file" id="anexo" name="anexo" accept="image/*,application/pdf" />
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Escopo</h3>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="escopoContratante">Escopo da Contratante</label>
+              <textarea id="escopoContratante" name="escopoContratante" rows="2" placeholder="Itens personalizados, um por linha"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="escopoContratada">Escopo da Contratada</label>
+              <textarea id="escopoContratada" name="escopoContratada" rows="2" placeholder="Itens personalizados, um por linha"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Planilha de Quantidades</h3>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="planilha">Upload de Planilha</label>
+              <input type="file" id="planilha" name="planilha" accept=".xls,.xlsx,.csv,.pdf" />
+            </div>
+            <div class="form-group full-width">
+              <label>Itens Dinâmicos</label>
+              <button type="button" class="btn-add-item">Adicionar Item</button>
+              <!-- Aqui futuramente virá a tabela dinâmica de itens -->
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Condições e Prazo</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prazoExecucao">Prazo de Execução</label>
+              <input type="text" id="prazoExecucao" name="prazoExecucao" />
+            </div>
+            <div class="form-group">
+              <label for="condicoesPagamento">Condições de Pagamento</label>
+              <input type="text" id="condicoesPagamento" name="condicoesPagamento" />
+            </div>
+            <div class="form-group">
+              <label for="validade">Validade da Proposta</label>
+              <input type="text" id="validade" name="validade" placeholder="Ex: 30 dias" />
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Contato e Responsável</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contatoComercial">Contato Comercial</label>
+              <input type="text" id="contatoComercial" name="contatoComercial" />
+            </div>
+            <div class="form-group">
+              <label for="responsavelTecnico">Responsável Técnico</label>
+              <input type="text" id="responsavelTecnico" name="responsavelTecnico" />
+            </div>
+            <div class="form-group">
+              <label for="assinatura">Assinatura Digital (opcional)</label>
+              <input type="file" id="assinatura" name="assinatura" accept="image/*,application/pdf" />
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Salvar Proposta</button>
+          <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container *ngIf="formView === 'lista'">
+      <div class="propostas-lista-fake">
+        <h3>Propostas Cadastradas</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nº Proposta</th>
+              <th>Cliente</th>
+              <th>Data de Emissão</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let proposta of propostasFake">
+              <td>{{ proposta.numero }}</td>
+              <td>{{ proposta.cliente }}</td>
+              <td>{{ proposta.data }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="getStatusBadgeClass(proposta.status)">{{ proposta.status }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="activeTab === 'textos'">
+  <div class="proposta-container">
+    <div class="proposta-header-bar">
+      <h2>Textos Padrão e Observações</h2>
+      <div class="proposta-header-actions">
+        <a href="#" class="header-link" [class.active]="textosView === 'form'" (click)="$event.preventDefault(); textosView = 'form';">
+          <i class="bi bi-ui-checks"></i> Formulário
+        </a>
+        <a href="#" class="header-link" [class.active]="textosView === 'lista'" (click)="$event.preventDefault(); textosView = 'lista';">
+          <i class="bi bi-list"></i> Lista
+        </a>
+      </div>
+    </div>
+    <ng-container *ngIf="textosView === 'form'">
+      <form class="proposta-form">
+        <div class="form-section">
+          <h3>Observações e Textos Padrão</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tituloTexto">Título</label>
+              <input type="text" id="tituloTexto" name="tituloTexto" placeholder="Título do texto padrão" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="observacoes">Observações Adicionais</label>
+              <textarea id="observacoes" name="observacoes" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="textosPadrao">Textos Padrão</label>
+              <textarea id="textosPadrao" name="textosPadrao" rows="4" placeholder="Declarações institucionais, compromissos legais, cláusulas padrão etc."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Salvar Texto</button>
+          <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container *ngIf="textosView === 'lista'">
+      <div class="propostas-lista-fake">
+        <h3>Textos Padrão Cadastrados</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th style="width:60px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let texto of textosFake">
+              <td>{{ texto.titulo }}</td>
+              <td>
+                <span class="icon-actions">
+                  <i class="bi bi-pencil-square"></i>
+                  <i class="bi bi-trash"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="activeTab === 'licitacoes'">
+  <div class="proposta-container">
+    <div class="proposta-header-bar">
+      <h2>Cadastro de Licitação</h2>
+      <div class="proposta-header-actions">
+        <a href="#" class="header-link" [class.active]="licitacoesView === 'form'" (click)="$event.preventDefault(); licitacoesView = 'form';">
+          <i class="bi bi-ui-checks"></i> Formulário
+        </a>
+        <a href="#" class="header-link" [class.active]="licitacoesView === 'lista'" (click)="$event.preventDefault(); licitacoesView = 'lista';">
+          <i class="bi bi-list"></i> Lista
+        </a>
+      </div>
+    </div>
+    <ng-container *ngIf="licitacoesView === 'form'">
+      <form class="proposta-form">
+        <div class="form-section">
+          <h3>🧾 Informações Gerais da Licitação</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="numLicitacao">Número da Licitação</label>
+              <input type="text" id="numLicitacao" name="numLicitacao" placeholder="Ex: 001/2025" />
+            </div>
+            <div class="form-group">
+              <label for="modalidade">Modalidade</label>
+              <input type="text" id="modalidadeLicitacao" name="modalidadeLicitacao" placeholder="Ex: Pregão, Concorrência..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="objetoLicitacao">Objeto da Licitação</label>
+              <textarea id="objetoLicitacao" name="objetoLicitacao" rows="2" placeholder="Descrição do objeto"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="unidade">Unidade/Secretaria Responsável</label>
+              <input type="text" id="unidade" name="unidade" />
+            </div>
+            <div class="form-group">
+              <label for="setor">Setor Requisitante</label>
+              <input type="text" id="setor" name="setor" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="numProcesso">Número do Processo Administrativo</label>
+              <input type="text" id="numProcesso" name="numProcesso" />
+            </div>
+            <div class="form-group">
+              <label for="anoLicitacao">Ano da Licitação</label>
+              <input type="text" id="anoLicitacao" name="anoLicitacao" />
+            </div>
+            <div class="form-group">
+              <label for="fonteRecursos">Fonte de Recursos</label>
+              <input type="text" id="fonteRecursos" name="fonteRecursos" placeholder="Ex: federal, estadual..." />
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>🗓️ Prazos e Datas Importantes</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dataPublicacao">Data da Publicação do Edital</label>
+              <input type="date" id="dataPublicacao" name="dataPublicacao" />
+            </div>
+            <div class="form-group">
+              <label for="dataAbertura">Data de Abertura das Propostas</label>
+              <input type="date" id="dataAbertura" name="dataAbertura" />
+            </div>
+            <div class="form-group">
+              <label for="prazoImpugnacao">Prazo para Impugnação</label>
+              <input type="date" id="prazoImpugnacao" name="prazoImpugnacao" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dataJulgamento">Data de Julgamento</label>
+              <input type="date" id="dataJulgamento" name="dataJulgamento" />
+            </div>
+            <div class="form-group">
+              <label for="dataHomologacao">Data da Homologação</label>
+              <input type="date" id="dataHomologacao" name="dataHomologacao" />
+            </div>
+            <div class="form-group">
+              <label for="dataAdjudicacao">Data da Adjudicação</label>
+              <input type="date" id="dataAdjudicacao" name="dataAdjudicacao" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prazoAssinatura">Prazo para Assinatura do Contrato</label>
+              <input type="date" id="prazoAssinatura" name="prazoAssinatura" />
+            </div>
+            <div class="form-group">
+              <label for="dataInicioVigencia">Data de Início da Vigência</label>
+              <input type="date" id="dataInicioVigencia" name="dataInicioVigencia" />
+            </div>
+            <div class="form-group">
+              <label for="dataTerminoVigencia">Data de Término da Vigência</label>
+              <input type="date" id="dataTerminoVigencia" name="dataTerminoVigencia" />
+            </div>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>📌 Andamento/Status</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="statusAtual">Status Atual</label>
+              <input type="text" id="statusAtual" name="statusAtual" placeholder="Ex: Em Elaboração, Publicado..." />
+            </div>
+            <div class="form-group">
+              <label for="responsavelAtual">Responsável Atual</label>
+              <input type="text" id="responsavelAtual" name="responsavelAtual" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="descAndamento">Descrição do Andamento Atual</label>
+              <textarea id="descAndamento" name="descAndamento" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="obsComplementares">Observações Complementares</label>
+              <textarea id="obsComplementares" name="obsComplementares" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="linkAcompanhamento">Link para Acompanhamento Público</label>
+              <input type="url" id="linkAcompanhamento" name="linkAcompanhamento" placeholder="https://..." />
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Salvar Licitação</button>
+          <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container *ngIf="licitacoesView === 'lista'">
+      <div class="propostas-lista-fake">
+        <h3>Licitações Cadastradas</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nº Licitação</th>
+              <th>Modalidade</th>
+              <th>Objeto</th>
+              <th>Status</th>
+              <th style="width:60px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lic of licitacoesFake">
+              <td>{{ lic.numero }}</td>
+              <td>{{ lic.modalidade }}</td>
+              <td>{{ lic.objeto }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="getStatusBadgeClass(lic.status)">{{ lic.status }}</span>
+              </td>
+              <td>
+                <span class="icon-actions">
+                  <i class="bi bi-pencil-square"></i>
+                  <i class="bi bi-trash"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+</div> 

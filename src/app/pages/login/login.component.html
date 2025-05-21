@@ -1,0 +1,105 @@
+<div class="login-container">
+  <div class="login-left">
+    <img class="login-logo" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo Autogab">
+    <h1>EXPERIÊNCIA & INOVAÇÃO</h1>
+     
+    <div class="login-features">
+      <div class="feature-card">
+        <i class="fas fa-desktop"></i>
+        <span>Monitor</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-dollar-sign"></i>
+        <span>Financeiro</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-cogs"></i>
+        <span>Técnica</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-briefcase"></i>
+        <span>Comercial & Operações</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-user-tie"></i>
+        <span>Superintendência</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt"></i>
+        <span>QSMS</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-truck"></i>
+        <span>Logística</span>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-question-circle"></i>
+        <span>Outro</span>
+      </div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="login-form-container">
+      <div class="login-logo-container">
+        <img class="login-logo-small" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo Autogab">
+      </div>
+      <h2 *ngIf="mode === 'login'">Bem-vindo de volta!</h2>
+      <h2 *ngIf="mode === 'reset-request'">Recuperar senha</h2>
+      <h2 *ngIf="mode === 'reset-confirm'">Definir nova senha</h2>
+      <p class="login-form-desc" *ngIf="mode === 'login'">Faça login para acessar sua conta</p>
+      <p class="login-form-desc" *ngIf="mode === 'reset-request'">Informe seu e-mail para receber o link de recuperação</p>
+      <p class="login-form-desc" *ngIf="mode === 'reset-confirm'">Digite sua nova senha abaixo</p>
+
+      <!-- Login -->
+      <form *ngIf="mode === 'login'" (submit)="onLogin($event)">
+        <div class="form-group">
+          <label for="username">E-mail</label>
+          <input id="username" type="email" placeholder="Digite seu e-mail" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input id="password" type="password" placeholder="Digite sua senha" autocomplete="current-password">
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox"> Lembrar-me
+          </label>
+          <a href="#" class="forgot-password" (click)="onForgotPassword($event)">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="login-btn" [disabled]="loading">Entrar <i class="fas fa-arrow-right"></i></button>
+      </form>
+
+      <!-- Solicitação de resgate de senha -->
+      <form *ngIf="mode === 'reset-request'" (submit)="onSendReset($event)">
+        <div class="form-group">
+          <label for="reset-email">E-mail</label>
+          <input id="reset-email" type="email" placeholder="Digite seu e-mail" autocomplete="username">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="login-btn" [disabled]="loading">Enviar link</button>
+          <a href="#" (click)="voltarParaLogin($event)" class="btn btn-secondary" style="margin-left: 8px;">Voltar</a>
+        </div>
+      </form>
+
+      <!-- Redefinição de senha -->
+      <form *ngIf="mode === 'reset-confirm'" (submit)="onResetPassword($event)">
+        <div class="form-group">
+          <label for="new-password">Nova senha</label>
+          <input id="new-password" type="password" placeholder="Digite a nova senha" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirmar nova senha</label>
+          <input id="confirm-password" type="password" placeholder="Confirme a nova senha" autocomplete="new-password">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="login-btn" [disabled]="loading">Redefinir senha</button>
+          <a href="#" (click)="voltarParaLogin($event)" class="btn btn-secondary" style="margin-left: 8px;">Voltar</a>
+        </div>
+      </form>
+
+      <div class="login-help">
+        Precisa de ajuda? <a href="#">Entre em contato</a>
+      </div>
+    </div>
+  </div>
+</div> 

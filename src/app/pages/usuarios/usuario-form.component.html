@@ -1,0 +1,42 @@
+<div class="usuarios_form_container card">
+  <div class="card-header">
+    <h2>{{ isEdit ? 'Editar Usuário' : 'Novo Usuário' }}</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-body">
+    <div class="form-row">
+      <div class="form-group grow-2 mb-2">
+        <label>Nome *</label>
+        <input formControlName="usu_nome" class="form-control" [class.is-invalid]="form.get('usu_nome')?.invalid && form.get('usu_nome')?.touched">
+        <div *ngIf="form.get('usu_nome')?.invalid && form.get('usu_nome')?.touched" class="invalid-feedback">Nome é obrigatório.</div>
+      </div>
+      <div class="form-group grow-2 mb-2">
+        <label>Email *</label>
+        <input formControlName="usu_email" class="form-control" [class.is-invalid]="form.get('usu_email')?.invalid && form.get('usu_email')?.touched">
+        <div *ngIf="form.get('usu_email')?.invalid && form.get('usu_email')?.touched" class="invalid-feedback">E-mail é obrigatório.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group grow-1 mb-2">
+        <label>Perfil</label>
+        <select formControlName="usu_perfil" class="form-control">
+          <option value="admin">Administrador</option>
+          <option value="user">Usuário</option>
+        </select>
+      </div>
+      <div class="form-group grow-1 mb-2">
+        <label>Ativo</label>
+        <select formControlName="usu_ativo" class="form-control">
+          <option value="S">Sim</option>
+          <option value="N">Não</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-success" type="submit" [disabled]="form.invalid || loading">
+        {{ isEdit ? 'Salvar Alterações' : 'Cadastrar' }}
+      </button>
+      <a class="btn btn-secondary ms-2" routerLink="/usuarios">Cancelar</a>
+      <div *ngIf="loading" class="mt-2">Salvando...</div>
+    </div>
+  </form>
+</div> 

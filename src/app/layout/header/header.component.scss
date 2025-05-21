@@ -1,0 +1,23 @@
+.main-header {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border);
+  margin-left: 250px;
+  transition: margin-left 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+:host-context(.sidebar-collapsed) .main-header {
+  margin-left: 0 !important;
+}
+
+.navbar-nav .nav-link {
+  color: var(--color-text) !important;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+  color: var(--color-primary) !important;
+}
+
+.navbar-nav .nav-icon {
+  color: var(--color-primary) !important;
+}

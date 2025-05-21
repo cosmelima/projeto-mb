@@ -1,0 +1,36 @@
+<div class="clientes_container card">
+  <div class="toolbar" style="margin-bottom: 16px; margin-top: 8px; margin-left: 8px;">
+    <button class="btn btn-primary" routerLink="/clientes/novo">Novo Cliente</button>
+  </div>
+  <table class="table table-striped table-hover mt-3">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Celular</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes">
+        <td>{{ c.cli_codigo }}</td>
+        <td>{{ c.cli_nome }}</td>
+        <td>{{ c.cli_email }}</td>
+        <td>{{ c.cli_cpf }}</td>
+        <td>{{ c.cli_telefone }}</td>
+        <td>{{ c.cli_celular }}</td>
+        <td>
+          <button class="btn-icon btn-edit" [routerLink]="['/clientes/editar', c.cli_codigo]" title="Editar">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn-icon btn-delete" (click)="delete(c.cli_codigo)" title="Excluir">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 

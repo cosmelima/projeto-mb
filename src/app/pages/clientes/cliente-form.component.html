@@ -1,0 +1,46 @@
+<div class="clientes_form_container card">
+  <div class="card-header">
+    <h2>{{ isEdit ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="form-body">
+    <div class="form-row">
+      <div class="form-group grow-2 mb-2">
+        <label>Nome *</label>
+        <input formControlName="cli_nome" class="form-control" [class.is-invalid]="form.get('cli_nome')?.invalid && form.get('cli_nome')?.touched">
+        <div *ngIf="form.get('cli_nome')?.invalid && form.get('cli_nome')?.touched" class="invalid-feedback">Nome é obrigatório.</div>
+      </div>
+      <div class="form-group grow-2 mb-2">
+        <label>Email</label>
+        <input formControlName="cli_email" class="form-control">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group grow-1 mb-2">
+        <label>CPF</label>
+        <input formControlName="cli_cpf" class="form-control">
+      </div>
+      <div class="form-group grow-1 mb-2">
+        <label>Telefone</label>
+        <input formControlName="cli_telefone" class="form-control">
+      </div>
+      <div class="form-group grow-1 mb-2">
+        <label>Celular</label>
+        <input formControlName="cli_celular" class="form-control">
+      </div>
+      <div class="form-group grow-1 mb-2">
+        <label>Inativo</label>
+        <select formControlName="cli_inativo" class="form-control">
+          <option value="N">Não</option>
+          <option value="S">Sim</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-success" type="submit" [disabled]="form.invalid || loading">
+        {{ isEdit ? 'Salvar Alterações' : 'Cadastrar' }}
+      </button>
+      <a class="btn btn-secondary ms-2" routerLink="/clientes">Cancelar</a>
+      <div *ngIf="loading" class="mt-2">Salvando...</div>
+    </div>
+  </form>
+</div> 

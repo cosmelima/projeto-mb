@@ -1,0 +1,38 @@
+/* Estilos para listagem de clientes */ 
+
+.toolbar {
+  margin-bottom: 16px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  font-size: 1.1em;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.btn-icon.btn-edit {
+  color: #1A77D4;
+}
+
+.btn-icon.btn-edit:hover {
+  background: #e3e6f0;
+}
+
+.btn-icon.btn-delete {
+  color: #FF4B4B;
+}
+
+.btn-icon.btn-delete:hover {
+  background: #ffeaea;
+} 

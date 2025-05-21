@@ -1,0 +1,54 @@
+<aside class="main-sidebar sidebar-light bg-white">
+  <!-- Brand Logo -->
+  <div class="login-logo-container">
+    <img class="login-logo-small" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo MBG">
+  </div>
+   
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{ userName }}</a>
+      </div>
+    </div>
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+        <ng-container *ngFor="let modulo of modulos">
+          <li class="nav-header nav-header-collapsible" (click)="toggleModule(modulo.mod_codigo)" style="cursor:pointer; display: flex; align-items: center; justify-content: space-between;">
+            <span>
+              <i *ngIf="modulo.mod_icon" class="me-2 {{ modulo.mod_icon }}"></i>
+              {{ modulo.mod_nome }}
+            </span>
+            <i class="bi" [ngClass]="openedModules[modulo.mod_codigo] ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+          </li>
+          <ul *ngIf="openedModules[modulo.mod_codigo]" class="nav flex-column ms-3">
+            <li *ngFor="let menu of modulo.menus" class="nav-item">
+              <a [routerLink]="menu.men_path" class="nav-link">
+                <i *ngIf="menu.men_icon" class="nav-icon {{ menu.men_icon }}"></i>
+                <p>{{ menu.men_nome }}</p>
+              </a>
+            </li>
+          </ul>
+        </ng-container>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

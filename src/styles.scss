@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --color-bg: #f5f6fa;
+  --color-bg-card: #fff;
+  --color-text: #23283a;
+  --color-border: #e3e6f0;
+  --color-primary: #1A77D4;
+  --color-accent: #4EB8FF;
+  --color-danger: #FF4B4B;
+  --color-btn: #1A77D4;
+  --color-btn-text: #fff;
+}
+
+body.dark-theme {
+  --color-bg: #101b45;
+  --color-bg-card: #101b45;
+  --color-text: #e3e6f0;
+  --color-border: #2c3145;
+  --color-primary: #4EB8FF;
+  --color-accent: #1A77D4;
+  --color-danger: #FF4B4B;
+  --color-btn: #1A77D4;
+  --color-btn-text: #fff;
+  --color-header-card: #14225c;
+  --color-header-card-text: #fff;
+}
+
+body {
+  background: var(--color-bg);
+}
+
+.clientes_container {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+}
+.clientes_container table {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+}
+.clientes_container th,
+.clientes_container td {
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+.clientes_container .btn-primary {
+  background: var(--color-btn) !important;
+  color: var(--color-btn-text) !important;
+  border: none !important;
+}
+.clientes_container .btn-icon.btn-edit {
+  color: var(--color-primary) !important;
+}
+.clientes_container .btn-icon.btn-delete {
+  color: var(--color-danger) !important;
+}
+
+.swal2-compact-popup {
+  min-width: 220px !important;
+  max-width: 320px !important;
+  height: 90px !important;
+  border-radius: 8px !important;
+  top: 16px !important;
+}
+
+.swal2-compact-title {
+  font-size: 1em !important;
+  margin-bottom: 0.1em !important;
+}
+
+.swal2-compact-html {
+  font-size: 0.85em !important;
+  margin-bottom: 0.3em !important;
+}
+
+.swal2-compact-actions {
+  margin-top: 0.2em !important;
+}
+
+.swal2-compact-confirm, .swal2-compact-cancel {
+  font-size: 0.85em !important;
+  padding: 0.2em 0.8em !important;
+  min-width: 50px !important;
+}
+
+.clientes_container .card-header,
+.clientes_container .form-header {
+  background: var(--color-header-card) !important;
+  color: var(--color-header-card-text) !important;
+  border-radius: 6px 6px 0 0;
+}

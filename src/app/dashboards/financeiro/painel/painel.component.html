@@ -1,0 +1,82 @@
+<div class="painel-container">
+  <div class="painel-header-row">
+    <div class="login-logo-container">
+      <img class="login-logo-small" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo Autogab">
+    </div>
+    <div class="painel-toolbar painel-toolbar-filtros">
+      <div class="painel-toolbar-group">
+        <label class="painel-toolbar-label">Intervalo</label>
+        <div class="painel-toolbar-dates-row">
+          <input type="date" [value]="dateStart" (change)="onDateStartChange($event)" class="painel-toolbar-date" />
+          <input type="date" [value]="dateEnd" (change)="onDateEndChange($event)" class="painel-toolbar-date" />
+        </div>
+        <div class="painel-toolbar-slider">
+          <ngx-slider [(value)]="sliderStart" [(highValue)]="sliderEnd" [options]="sliderOptions" (userChangeEnd)="onSliderChange()"></ngx-slider>
+        </div>
+      </div>
+      <div class="painel-toolbar-group">
+        <label class="painel-toolbar-label">Tipo</label>
+        <select class="painel-toolbar-select" [(ngModel)]="tipoSelecionado">
+          <option value="caixa">Caixa</option>
+          <option value="competencia">Competência</option>
+        </select>
+      </div>
+      <div class="painel-toolbar-group">
+        <label class="painel-toolbar-label">Projeto</label>
+        <select class="painel-toolbar-select" [(ngModel)]="projetoSelecionado">
+          <option *ngFor="let projeto of projetos" [value]="projeto.value">{{ projeto.label }}</option>
+        </select>
+      </div>
+      <div class="painel-toolbar-group">
+        <label class="painel-toolbar-label">Centro de Custo</label>
+        <select class="painel-toolbar-select" [(ngModel)]="centroCustoSelecionado">
+          <option *ngFor="let cc of centrosCusto" [value]="cc.value">{{ cc.label }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="painel-cards painel-cards-metricas">
+    <div class="painel-card-metrica">
+      <span class="painel-card-label">Caixa Anterior</span>
+      <span class="painel-card-valor">R$ 1.200.000</span>
+    </div>
+    <div class="painel-card-metrica">
+      <span class="painel-card-label">Entradas</span>
+      <span class="painel-card-valor">R$ 800.000</span>
+    </div>
+    <div class="painel-card-metrica">
+      <span class="painel-card-label">Saídas</span>
+      <span class="painel-card-valor">R$ 350.000</span>
+    </div>
+    <div class="painel-card-metrica">
+      <span class="painel-card-label">Saldo Atual</span>
+      <span class="painel-card-valor">R$ 1.650.000</span>
+    </div>
+  </div>
+  <div class="painel-graficos">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+      <div class="painel-grafico-card">
+        <echarts [options]="barOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+      <div class="painel-grafico-card">
+        <echarts [options]="gaugeOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+      <div class="painel-grafico-card">
+        <echarts [options]="pieOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      </div>
+    </div>
+  </div>
+  <div class="painel-graficos" style="margin-top: 32px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+      <div class="painel-grafico-card">
+        <apx-chart [series]="apexDonutSeries" [chart]="apexDonutChart" [labels]="apexDonutLabels" [colors]="apexDonutColors" [legend]="apexDonutLegend" [dataLabels]="apexDonutDataLabels" [responsive]="apexDonutResponsive"></apx-chart>
+      </div>
+      <div class="painel-grafico-card">
+        <apx-chart [series]="apexLineSeries" [chart]="apexLineChart" [xaxis]="apexLineXaxis" [colors]="apexLineColors" [stroke]="apexLineStroke" [dataLabels]="apexLineDataLabels"></apx-chart>
+      </div>
+      <div class="painel-grafico-card">
+        <apx-chart [series]="apexBarSeries" [chart]="apexBarChart" [xaxis]="apexBarXaxis" [colors]="apexBarColors" [legend]="apexBarLegend" [plotOptions]="apexBarPlotOptions"></apx-chart>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,35 @@
+<div class="usuarios_container card">
+  <div class="toolbar" style="margin-bottom: 16px; margin-top: 8px; margin-left: 8px;">
+    <button class="btn btn-primary" routerLink="/usuarios/novo">Novo Usuário</button>
+  </div>
+  <table class="table table-striped table-hover mt-3">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Login</th>
+        <th>Master</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of usuarios">
+        <td>{{ u.usu_codigo }}</td>
+        <td>{{ u.usu_nome }}</td>
+        <td>{{ u.usu_email }}</td>
+        <td>{{ u.usu_login }}</td>
+        <td>{{ u.usu_master ? 'Sim' : 'Não' }}</td>
+        <td>
+          <button class="btn-icon btn-edit" [routerLink]="['/usuarios/editar', u.usu_codigo]" title="Editar">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn-icon btn-delete" (click)="delete(u.usu_codigo)" title="Excluir">
+            <i class="fas fa-trash"></i>
+          </button>
+          <button class="btn btn-warning btn-sm ms-1" [routerLink]="['/usuarios/permissoes', u.usu_codigo]">Permissões</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
