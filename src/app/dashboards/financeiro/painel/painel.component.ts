@@ -86,17 +86,52 @@ export class PainelComponent {
   public apexDonutResponsive: any = [{ breakpoint: 480, options: { chart: { width: 250 } } }];
 
   // ApexCharts - Linha
-  public apexLineSeries: any = [{ name: 'Atendimentos', data: [200, 310, 250, 400, 340, 500, 450] }];
-  public apexLineChart: any = { height: 300, type: 'line', zoom: { enabled: false } };
+  public apexLineSeries: any = [
+    {
+      name: 'Faturamento',
+      type: 'line',
+      data: [120000, 135000, 128000, 142000, 150000, 160000, 170000, 180000, 175000, 185000, 190000, 200000],
+      color: '#1A77D4'
+    },
+    {
+      name: 'Meta',
+      type: 'line',
+      data: [110000, 130000, 125000, 140000, 145000, 155000, 165000, 170000, 172000, 180000, 185000, 195000],
+      color: '#28a745'
+    }
+  ];
+  public apexLineChart: any = {
+    height: 300,
+    type: 'line',
+    zoom: { enabled: false },
+    toolbar: { show: false },
+    annotations: {
+      xaxis: [
+        {
+          x: 'Jun',
+          borderColor: '#28a745',
+          label: {
+            style: {
+              color: '#fff',
+              background: '#28a745',
+              fontWeight: 600
+            },
+            text: 'Realizado'
+          }
+        }
+      ]
+    }
+  };
   public apexLineDataLabels: any = { enabled: false };
-  public apexLineStroke: any = { curve: 'smooth' };
-  public apexLineXaxis: any = { categories: ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'] };
-  public apexLineColors: any = ['#1A77D4'];
+  public apexLineStroke: any = { width: [2, 3], curve: 'smooth' };
+  public apexLineMarkers: any = { size: [0, 6], strokeWidth: 2, hover: { size: 8 } };
+  public apexLineXaxis: any = { categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'] };
+  public apexLineColors: any = ['#1A77D4', '#28a745'];
 
   // ApexCharts - Barras Empilhadas
   public apexBarSeries: any = [
-    { name: 'Novos', data: [2, 3, 1, 4, 2, 3, 2] },
-    { name: 'Em Andamento', data: [5, 4, 6, 3, 5, 4, 5] }
+    { name: 'Comprometido', data: [2, 3, 1, 4, 2, 3, 2] },
+    { name: 'Previsto', data: [5, 4, 6, 3, 5, 4, 5] }
   ];
   public apexBarChart: any = { type: 'bar', height: 300, stacked: true };
   public apexBarPlotOptions: any = { bar: { horizontal: false, borderRadius: 6 } };
@@ -158,18 +193,22 @@ export class PainelComponent {
   }
 
   onDateStartChange(event: any) {
+    /*
     this.dateStart = event.target.value;
     this.sliderStart = 0;
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
     this.dateRangeMax = this.sliderEnd;
     this.sliderOptions = { ...this.sliderOptions, ceil: this.dateRangeMax };
+    */
   }
 
   onDateEndChange(event: any) {
+    /*
     this.dateEnd = event.target.value;
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
     this.dateRangeMax = this.sliderEnd;
     this.sliderOptions = { ...this.sliderOptions, ceil: this.dateRangeMax };
+    */
   }
 
   onSliderChange() {

@@ -1,0 +1,18 @@
+<div class="login-mobile-bg">
+  <div class="login-mobile-content">
+    <img src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo" class="login-mobile-logo" />
+    <form class="login-mobile-form" (submit)="onLogin($event)">
+      <div class="login-mobile-input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" />
+      </div>
+      <div class="login-mobile-input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Senha" [(ngModel)]="senha" name="senha" />
+      </div>
+      <a class="login-mobile-forgot" href="#">Esqueceu sua senha?</a>
+      <button class="login-mobile-btn" [disabled]="loading">Entrar</button>
+    </form>
+    
+  </div>
+</div> 

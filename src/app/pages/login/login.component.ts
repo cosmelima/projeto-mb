@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   mode: 'login' | 'reset-request' | 'reset-confirm' = 'login';
   token: string | null = null;
+  showPassword = false;
 
   constructor(
     private router: Router,

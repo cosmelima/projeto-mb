@@ -14,15 +14,41 @@ import { ModuloFormComponent } from './pages/modulos/modulo-form.component';
 import { MenuFormComponent } from './pages/menus/menu-form.component';
 import { PropostasComponent } from './cadastros/propostas/propostas.component';
 import { PainelPropostaComponent } from './dashboards/propostas/painel-proposta/painel-proposta.component';
+import { PropostasPrintComponent } from './cadastros/propostas/propostas-print.component';
+import { PropostasRascunhoPrintComponent } from './cadastros/propostas/propostas-rascunho-print.component';
+import { MobileLayoutComponent } from './layout/mobile-layout/mobile-layout.component';
+import { MobileGuard } from './core/guards/mobile.guard';
+import { LoginMobileComponent } from './pages/login-mobile/login-mobile.component';
+import { HomeMobileComponent } from './mobile-pages/home/home-mobile.component';
+import { FinanceiroMobileComponent } from './mobile-pages/financeiro/financeiro-mobile.component';
+import { RedirectGuard } from './core/guards/redirect.guard';
+import { RedirectComponent } from './core/components/redirect.component';
+import { ConsultasApiComponent } from './pages/consultas-api/consultas-api.component';
+import { CaixaCompetenciaComponent } from './dashboards/financeiro/caixa-competencia/caixa-competencia.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: RedirectComponent, canActivate: [RedirectGuard], pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'm/login', component: LoginMobileComponent },
+  // Rotas mobile
+  {
+    path: '',
+    component: MobileLayoutComponent,
+    canActivate: [MobileGuard],
+    children: [
+      { path: 'inicio', component: HomeMobileComponent },
+      { path: 'financeiro', component: FinanceiroMobileComponent },
+      // Adicione aqui outras rotas mobile específicas
+    ]
+  },
+  // Rotas desktop
   {
     path: '',
     component: PainelLayoutComponent,
     children: [
       { path: 'financeiro/painel', component: PainelComponent },
+      { path: 'financeiro/caixa-competencia', component: CaixaCompetenciaComponent },
       { path: 'clientes', component: ClientesListComponent },
       { path: 'clientes/novo', component: ClienteFormComponent },
       { path: 'clientes/editar/:id', component: ClienteFormComponent },
@@ -37,8 +63,12 @@ const routes: Routes = [
       { path: 'menus/novo', component: MenuFormComponent },
       { path: 'menus/editar/:id', component: MenuFormComponent },
       { path: 'cadastros/propostas', component: PropostasComponent },
+      { path: 'cadastros/propostas/print', component: PropostasPrintComponent },
+      { path: 'cadastros/propostas/rascunho-print', component: PropostasRascunhoPrintComponent },
       { path: 'dashboards/propostas/painel-proposta', component: PainelPropostaComponent },
-      { path: 'propostas/painel', component: PainelPropostaComponent }
+      { path: 'propostas/painel', component: PainelPropostaComponent },
+      { path: 'consultas-api', component: ConsultasApiComponent },
+      { path: 'perfil', component: PerfilComponent }
     ]
   }
 ];

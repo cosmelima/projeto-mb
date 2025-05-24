@@ -101,14 +101,19 @@ $font-principal: 'Poppins', 'Roboto', Arial, sans-serif;
   i {
     font-size: 2rem;
     margin-bottom: 8px;
-    color: $azul-claro;
-    filter: drop-shadow(0 2px 6px #1A77D4);
+    color: #e4eef5;
   }
   &:hover {
     background: linear-gradient(120deg, #233e6e 0%, #1a2a4d 100%);
     box-shadow: 0 4px 16px rgba(26,119,212,0.16);
     border: 1.5px solid $azul-claro;
   }
+}
+
+.featute-ativo {
+  background: linear-gradient(120deg, #233e6e 0%, #1a2a4d 100%);
+    box-shadow: 0 4px 16px rgba(26,119,212,0.16);
+    border: 1.5px solid $azul-claro;
 }
 
 .login-right {

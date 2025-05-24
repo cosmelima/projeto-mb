@@ -17,6 +17,7 @@ import { ContentWrapperComponent } from './layout/content-wrapper/content-wrappe
 import { FooterComponent } from './layout/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PainelComponent } from './dashboards/financeiro/painel/painel.component';
+import { CaixaCompetenciaComponent } from './dashboards/financeiro/caixa-competencia/caixa-competencia.component';
 import { PainelLayoutComponent } from './layout/painel-layout/painel-layout.component';
 import { ClientesListComponent } from './pages/clientes/clientes-list.component';
 import { ClienteFormComponent } from './pages/clientes/cliente-form.component';
@@ -30,16 +31,22 @@ import { MenuFormComponent } from './pages/menus/menu-form.component';
 import { CadastrosModule } from './cadastros/cadastros.module';
 import { PropostasDashboardModule } from './dashboards/propostas/propostas.module';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { LayoutModule } from './layout/layout.module';
+import { LoginMobileModule } from './pages/login-mobile/login-mobile.module';
+import { HomeMobileModule } from './mobile-pages/home/home-mobile.module';
+import { FinanceiroMobileModule } from './mobile-pages/financeiro/financeiro-mobile.module';
+import { RedirectComponent } from './core/components/redirect.component';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    SidebarComponent,
     ContentWrapperComponent,
     FooterComponent,
     PainelComponent,
+    CaixaCompetenciaComponent,
     PainelLayoutComponent,
     ClientesListComponent,
     ClienteFormComponent,
@@ -49,7 +56,8 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
     ModulosListComponent,
     ModuloFormComponent,
     MenusListComponent,
-    MenuFormComponent
+    MenuFormComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,12 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
     }),
     NgApexchartsModule,
     CadastrosModule,
-    PropostasDashboardModule
+    PropostasDashboardModule,
+    LayoutModule,
+    LoginMobileModule,
+    HomeMobileModule,
+    FinanceiroMobileModule,
+    PagesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

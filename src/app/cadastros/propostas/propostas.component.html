@@ -134,6 +134,7 @@
         <div class="form-actions">
           <button type="submit" class="btn-primary">Salvar Proposta</button>
           <button type="button" class="btn-secondary">Cancelar</button>
+          <button type="button" class="btn-print" (click)="imprimirRascunho()"><i class="bi bi-printer"></i> Imprimir Rascunho</button>
         </div>
       </form>
     </ng-container>
@@ -143,6 +144,7 @@
         <table>
           <thead>
             <tr>
+              <th style="width:40px;"></th>
               <th>Nº Proposta</th>
               <th>Cliente</th>
               <th>Data de Emissão</th>
@@ -151,6 +153,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let proposta of propostasFake">
+              <td>
+                <button class="btn-print" title="Imprimir Proposta" (click)="imprimirProposta(proposta)"><i class="bi bi-printer"></i></button>
+              </td>
               <td>{{ proposta.numero }}</td>
               <td>{{ proposta.cliente }}</td>
               <td>{{ proposta.data }}</td>

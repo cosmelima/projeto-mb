@@ -68,11 +68,8 @@
   </div>
   <div class="painel-graficos" style="margin-top: 32px;">
     <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
-      <div class="painel-grafico-card">
-        <apx-chart [series]="apexDonutSeries" [chart]="apexDonutChart" [labels]="apexDonutLabels" [colors]="apexDonutColors" [legend]="apexDonutLegend" [dataLabels]="apexDonutDataLabels" [responsive]="apexDonutResponsive"></apx-chart>
-      </div>
-      <div class="painel-grafico-card">
-        <apx-chart [series]="apexLineSeries" [chart]="apexLineChart" [xaxis]="apexLineXaxis" [colors]="apexLineColors" [stroke]="apexLineStroke" [dataLabels]="apexLineDataLabels"></apx-chart>
+      <div class="painel-grafico-card" style="flex: 2 1 0; min-width: 380px;">
+        <apx-chart [series]="apexLineSeries" [chart]="apexLineChart" [xaxis]="apexLineXaxis" [colors]="apexLineColors" [stroke]="apexLineStroke" [dataLabels]="apexLineDataLabels" [markers]="apexLineMarkers"></apx-chart>
       </div>
       <div class="painel-grafico-card">
         <apx-chart [series]="apexBarSeries" [chart]="apexBarChart" [xaxis]="apexBarXaxis" [colors]="apexBarColors" [legend]="apexBarLegend" [plotOptions]="apexBarPlotOptions"></apx-chart>

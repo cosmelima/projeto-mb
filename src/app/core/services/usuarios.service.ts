@@ -13,5 +13,6 @@ export class UsuariosService {
   getByCliente(cli_codigo: number): Observable<any[]> { return this.http.get<any[]>(`${this.api}/cliente/${cli_codigo}`); }
   create(data: any): Observable<any> { return this.http.post(this.api, data); }
   update(id: number, data: any): Observable<any> { return this.http.put(`${this.api}/${id}`, data); }
+  updateSenha(id: number, data: any): Observable<any> { return this.http.put(`${this.api}/senha/${id}`, data); }
   delete(id: number): Observable<any> { return this.http.delete(`${this.api}/${id}`); }
 } 

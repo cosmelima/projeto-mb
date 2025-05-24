@@ -333,4 +333,42 @@ select:focus {
 }
 .status-badge.em-andamento {
   background: #17a2b8;
+}
+
+.form-actions .btn-print {
+  background: linear-gradient(90deg, var(--color-primary, #1A77D4), var(--color-accent, #4EB8FF));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--sombra-card, rgba(26,119,212,0.10));
+  transition: background 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-actions .btn-print:hover {
+  background: linear-gradient(90deg, var(--color-accent, #4EB8FF), var(--color-primary, #1A77D4));
+}
+
+.btn-print {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-print:hover {
+  background: var(--color-accent);
+  color: #fff;
 } 

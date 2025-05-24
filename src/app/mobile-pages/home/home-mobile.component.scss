@@ -1,0 +1,172 @@
+.home-mobile-bg {
+  min-height: 100vh;
+  background: #f7f8fc;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  padding-bottom: 24px;
+}
+
+.home-mobile-header {
+  background: linear-gradient(175deg, #0C1C45 0%, #0b0415 100%);
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  position: relative;
+  padding: 24px 18px 38px 18px;
+  padding-top: 0;
+  color: #fff;
+  overflow: hidden;
+}
+
+.home-mobile-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-mobile-header-menu, .home-mobile-header-icon {
+  font-size: 1.3rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.home-mobile-logo {
+  display: none;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(26, 119, 212, 0.1);
+  opacity: 0.2;
+}
+
+.home-mobile-header-info {
+  margin-top: 0px;
+  z-index: 2;
+  position: relative;
+}
+
+.home-mobile-welcome {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.home-mobile-username {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.home-mobile-balance-label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.home-mobile-balance {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+}
+.home-mobile-header-desc {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.home-mobile-header-bgicon {
+  position: absolute;
+  right: 18px;
+  bottom: 8px;
+  font-size: 5.5rem;
+  color: #fff;
+  opacity: 0.08;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-mobile-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(26,119,212,0.07);
+  margin: -32px 16px 18px 16px;
+  padding: 18px 8px 10px 8px;
+  z-index: 2;
+  position: relative;
+}
+
+.home-mobile-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #1A77D4;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, transform 0.12s;
+  border-radius: 12px;
+  padding: 8px 0 4px 0;
+}
+.home-mobile-shortcut i {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+.home-mobile-shortcut:active, .home-mobile-shortcut:hover {
+  background: #e3e6f0;
+  color: #233e6e;
+  transform: scale(1.07);
+}
+
+.home-mobile-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #223366;
+  margin: 18px 0 8px 22px;
+}
+
+.home-mobile-transactions {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(26,119,212,0.07);
+  margin: 0 16px;
+  padding: 10px 0;
+}
+
+.home-mobile-transaction {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid #f0f1f6;
+}
+.home-mobile-transaction:last-child {
+  border-bottom: none;
+}
+.home-mobile-transaction-icon {
+  background: #e3e6f0;
+  color: #1A77D4;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-right: 12px;
+}
+.home-mobile-transaction-info {
+  flex: 1;
+}
+.home-mobile-transaction-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #223366;
+}
+.home-mobile-transaction-date {
+  font-size: 0.85rem;
+  color: #B3B3B3;
+}
+.home-mobile-transaction-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1A77D4;
+} 

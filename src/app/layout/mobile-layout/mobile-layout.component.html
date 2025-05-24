@@ -1,0 +1,51 @@
+<div class="mobile-layout">
+  <header class="mobile-header">
+    <button class="menu-btn" (click)="toggleSidebar()">
+      <i class="fa fa-ellipsis-h"></i>
+    </button>
+    
+    <span class="app-title">MBG - Engenharia</span>
+    <span class="header-bell"><i class="bi bi-bell"></i></span>
+  </header>
+
+  <nav class="mobile-sidebar" [class.open]="sidebarOpen">
+    <div class="sidebar-content">
+      <div class="sidebar-user">
+        <div class="avatar"><i class="fa fa-user"></i></div>
+        <div class="user-info">
+          <div class="user-name">{{ userName }}</div>
+          <div class="user-version">Versão: {{ version }}</div>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><i class="fa fa-cog"></i> Configurações</li>
+        <li><i class="fa fa-question-circle"></i> Ajuda</li>
+        <li><i class="fa fa-sign-out-alt"></i> Sair</li>
+        <li><i class="fa fa-sync-alt"></i> Atualizar Subscription</li>
+      </ul>
+      <div class="sidebar-notifications">
+        <div class="notif-row">
+          <span><i class="fa fa-bell"></i> Notificações</span>
+          <label class="switch">
+            <input type="checkbox" disabled>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="notif-status">
+          <span class="blocked">Bloqueado - <a href="#">Como reativar?</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-backdrop" (click)="closeSidebar()" *ngIf="sidebarOpen"></div>
+  </nav>
+
+  <main class="mobile-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="mobile-bottom-nav">
+    <button routerLink="/inicio" routerLinkActive="active"><i class="bi bi-house"></i><span>Início</span></button>
+  
+    <button routerLink="/config" routerLinkActive="active"><i class="bi bi-gear"></i><span>Config</span></button>
+  </footer>
+</div> 

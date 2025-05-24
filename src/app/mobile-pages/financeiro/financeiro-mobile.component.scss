@@ -1,0 +1,77 @@
+.financeiro-mobile-bg {
+  min-height: 100vh;
+  background: #f7f8fc;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  padding: 16px 0 32px 0;
+}
+
+.financeiro-mobile-header {
+  text-align: center;
+  margin-bottom: 12px;
+  h2 {
+    color: #1A77D4;
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+  }
+  .financeiro-mobile-saldo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #223366;
+    margin-bottom: 8px;
+  }
+}
+
+.financeiro-mobile-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.financeiro-mobile-card {
+  background: linear-gradient(90deg, #233e6e 0%, #1A77D4 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 0 8px 0;
+  min-width: 90px;
+  flex: 1 1 90px;
+  text-align: center;
+  font-size: 0.98rem;
+  box-shadow: 0 2px 8px rgba(26,119,212,0.10);
+  span {
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+  strong {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+}
+
+.financeiro-mobile-graficos {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+  margin: 0 8px;
+}
+.grafico-mobile {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26,119,212,0.07);
+  padding: 8px 4px;
+  min-height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Garante que o echarts ocupe todo o espaço do container
+.grafico-mobile echarts {
+  width: 100% !important;
+  min-height: 180px !important;
+  display: block;
+} 

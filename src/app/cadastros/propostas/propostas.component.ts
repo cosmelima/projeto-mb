@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-propostas',
@@ -35,10 +36,39 @@ export class PropostasComponent {
     'Prefeitura de Manaus'
   ];
 
+  constructor(private router: Router) {}
+
   getStatusBadgeClass(status: string): string {
     if (!status) return '';
     // Normaliza para minúsculas, remove acentos e troca espaços por hífen
     let s = status.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/\s+/g, '-');
     return s;
+  }
+
+  imprimirProposta(proposta: any) {
+    this.router.navigate(['/cadastros/propostas/print'], { state: { proposta } });
+  }
+
+  imprimirRascunho() {
+    // Coleta os dados do formulário manualmente (exemplo para campos principais)
+    const proposta = {
+      numero: (document.getElementById('numeroProposta') as HTMLInputElement)?.value || '',
+      cliente: (document.getElementById('cliente') as HTMLSelectElement)?.value || '',
+      data: (document.getElementById('dataEmissao') as HTMLInputElement)?.value || '',
+      destinatario: (document.getElementById('destinatario') as HTMLInputElement)?.value || '',
+      objeto: (document.getElementById('objeto') as HTMLInputElement)?.value || '',
+      local: (document.getElementById('local') as HTMLInputElement)?.value || '',
+      modalidade: (document.getElementById('modalidade') as HTMLInputElement)?.value || '',
+      descricao: (document.getElementById('descricao') as HTMLTextAreaElement)?.value || '',
+      escopoContratante: (document.getElementById('escopoContratante') as HTMLTextAreaElement)?.value || '',
+      escopoContratada: (document.getElementById('escopoContratada') as HTMLTextAreaElement)?.value || '',
+      prazoExecucao: (document.getElementById('prazoExecucao') as HTMLInputElement)?.value || '',
+      condicoesPagamento: (document.getElementById('condicoesPagamento') as HTMLInputElement)?.value || '',
+      validade: (document.getElementById('validade') as HTMLInputElement)?.value || '',
+      contatoComercial: (document.getElementById('contatoComercial') as HTMLInputElement)?.value || '',
+      responsavelTecnico: (document.getElementById('responsavelTecnico') as HTMLInputElement)?.value || '',
+      itens: [] // Pode ser expandido para coletar itens dinâmicos
+    };
+    this.router.navigate(['/cadastros/propostas/rascunho-print'], { state: { proposta } });
   }
 } 

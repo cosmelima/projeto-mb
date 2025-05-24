@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit {
 
   onFullscreen(event: Event) {
     event.preventDefault();
+
+    console.log(this.toggleMenu)
+
+    this.onToggleMenu()
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {

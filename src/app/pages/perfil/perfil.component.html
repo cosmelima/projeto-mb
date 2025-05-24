@@ -1,0 +1,40 @@
+<div class="perfil-container">
+  <div class="perfil-side-info">
+    <h5>Por que atualizar seu perfil?</h5>
+    <p>Gerencie suas credenciais, mantenha seus dados atualizados e garanta a segurança da sua conta.</p>
+  </div>
+  <div class="perfil-form-area">
+    <div class="perfil-tabs">
+      <button type="button" class="perfil-tab" [class.active]="abaAtiva === 'dados'" (click)="abaAtiva = 'dados'">Dados Pessoais</button>
+      <button type="button" class="perfil-tab" [class.active]="abaAtiva === 'senha'" (click)="abaAtiva = 'senha'">Alterar Senha</button>
+    </div>
+    <div *ngIf="abaAtiva === 'dados'">
+      <h2>Dados Pessoais</h2>
+      <form (ngSubmit)="onSubmitDados()">
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input id="nome" name="nome" type="text" class="form-control" placeholder="Seu nome completo" [(ngModel)]="nome" name="nome" required />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input id="email" name="email" type="email" class="form-control" placeholder="seu@email.com" [(ngModel)]="email" name="email" required />
+        </div>
+        <button type="submit" class="btn-salvar">Salvar Dados</button>
+      </form>
+    </div>
+    <div *ngIf="abaAtiva === 'senha'">
+      <h2>Alterar Senha</h2>
+      <form (ngSubmit)="onSubmitSenha()">
+        <div class="form-group">
+          <label for="senha">Nova Senha:</label>
+          <input id="senha" name="senha" type="password" class="form-control" placeholder="Digite uma nova senha" [(ngModel)]="novaSenha" name="novaSenha" required />
+        </div>
+        <div class="form-group">
+          <label for="senha2">Confirme a Nova Senha:</label>
+          <input id="senha2" name="senha2" type="password" class="form-control" placeholder="Confirme a nova senha" [(ngModel)]="novaSenha2" name="novaSenha2" required />
+        </div>
+        <button type="submit" class="btn-salvar">Salvar Senha</button>
+      </form>
+    </div>
+  </div>
+</div> 

@@ -7,9 +7,8 @@
       <tr>
         <th>Código</th>
         <th>Nome</th>
-        <th>Email</th>
-        <th>Login</th>
-        <th>Master</th>
+        <th>Email</th> 
+        <th>Ativo</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -17,9 +16,8 @@
       <tr *ngFor="let u of usuarios">
         <td>{{ u.usu_codigo }}</td>
         <td>{{ u.usu_nome }}</td>
-        <td>{{ u.usu_email }}</td>
-        <td>{{ u.usu_login }}</td>
-        <td>{{ u.usu_master ? 'Sim' : 'Não' }}</td>
+        <td>{{ u.usu_email }}</td> 
+        <td>{{ u.usu_ativo=='S' ? 'Sim' : 'Não' }}</td>
         <td>
           <button class="btn-icon btn-edit" [routerLink]="['/usuarios/editar', u.usu_codigo]" title="Editar">
             <i class="fas fa-edit"></i>

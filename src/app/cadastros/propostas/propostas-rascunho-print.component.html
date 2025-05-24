@@ -1,0 +1,60 @@
+<div class="print-container">
+  <div class="print-header">
+    <img src="assets/dist/img/logo-mb.png" alt="Logo MB" class="print-logo">
+    <div class="print-title">
+      <h1>Rascunho de Proposta Comercial</h1>
+      <div class="print-num">Nº {{ proposta.numero }}</div>
+    </div>
+  </div>
+  <div class="print-info">
+    <div><strong>Cliente:</strong> {{ proposta.cliente }}</div>
+    <div><strong>Data de Emissão:</strong> {{ proposta.data }}</div>
+    <div><strong>Destinatário:</strong> {{ proposta.destinatario }}</div>
+    <div><strong>Objeto:</strong> {{ proposta.objeto }}</div>
+    <div><strong>Local:</strong> {{ proposta.local }}</div>
+    <div><strong>Modalidade:</strong> {{ proposta.modalidade }}</div>
+    <div><strong>Descrição:</strong> {{ proposta.descricao }}</div>
+  </div>
+  <div class="print-section">
+    <h3>Escopo</h3>
+    <div><strong>Contratante:</strong> {{ proposta.escopoContratante }}</div>
+    <div><strong>Contratada:</strong> {{ proposta.escopoContratada }}</div>
+  </div>
+  <div class="print-section">
+    <h3>Itens/Planilha</h3>
+    <table class="print-table">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Qtd</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of proposta.itens">
+          <td>{{ item.descricao }}</td>
+          <td>{{ item.qtd }}</td>
+          <td>{{ item.valor }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="print-section">
+    <h3>Condições e Prazo</h3>
+    <div><strong>Prazo de Execução:</strong> {{ proposta.prazoExecucao }}</div>
+    <div><strong>Condições de Pagamento:</strong> {{ proposta.condicoesPagamento }}</div>
+    <div><strong>Validade da Proposta:</strong> {{ proposta.validade }}</div>
+  </div>
+  <div class="print-section">
+    <h3>Contato e Responsável</h3>
+    <div><strong>Contato Comercial:</strong> {{ proposta.contatoComercial }}</div>
+    <div><strong>Responsável Técnico:</strong> {{ proposta.responsavelTecnico }}</div>
+  </div>
+  <div class="print-actions no-print">
+    <button (click)="imprimir()" class="btn-primary">Imprimir</button>
+    <button (click)="voltar()" class="btn-secondary">Voltar</button>
+  </div>
+  <div class="print-rodape">
+    <div>Marques & Bezerra Engenharia - Rascunho de proposta gerado eletronicamente</div>
+  </div>
+</div> 
