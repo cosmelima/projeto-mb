@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PropostasComponent } from './propostas/propostas.component';
+import { VisoesComponent } from './visoes/visoes.component';
 
 @NgModule({
-  declarations: [PropostasComponent],
+  declarations: [PropostasComponent, VisoesComponent],
   imports: [CommonModule, FormsModule],
-  exports: [PropostasComponent]
+  exports: [PropostasComponent, VisoesComponent]
 })
 export class CadastrosModule {} 

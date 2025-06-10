@@ -1,0 +1,41 @@
+.visoes-container {
+  max-width: 600px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(26,119,212,0.10);
+  padding: 32px 24px;
+}
+.visoes-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.visoes-lista {
+  margin-top: 18px;
+}
+.visoes-lista ul {
+  list-style: none;
+  padding: 0;
+}
+.visoes-lista li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e3e6f0;
+}
+.visoes-lista button {
+  background: #1A77D4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.visoes-lista button:hover {
+  background: #223366;
+} 

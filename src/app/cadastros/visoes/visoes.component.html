@@ -1,0 +1,18 @@
+<div class="visoes-container">
+  <h2>Gestão de Visões do Plano de Contas</h2>
+  <div class="visoes-upload">
+    <label for="csvFile">Importar nova visão (CSV):</label>
+    <input type="file" id="csvFile" (change)="onFileSelected($event)" accept=".csv" />
+    <button class="btn btn-primary" (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+  </div>
+  <div class="visoes-lista">
+    <h3>Visões Cadastradas</h3>
+    <!-- Lista de visões será exibida aqui -->
+    <ul>
+      <li *ngFor="let visao of visoes">
+        {{ visao }}
+        <button class="btn btn-danger" (click)="onDelete(visao)">Excluir</button>
+      </li>
+    </ul>
+  </div>
+</div> 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { PainelComponent } from './dashboards/financeiro/painel/painel.component';
+import { PainelComponent } from './dashboards/painel/painel.component';
 import { PainelLayoutComponent } from './layout/painel-layout/painel-layout.component';
 import { ClientesListComponent } from './pages/clientes/clientes-list.component';
 import { UsuariosListComponent } from './pages/usuarios/usuarios-list.component';
@@ -24,8 +24,9 @@ import { FinanceiroMobileComponent } from './mobile-pages/financeiro/financeiro-
 import { RedirectGuard } from './core/guards/redirect.guard';
 import { RedirectComponent } from './core/components/redirect.component';
 import { ConsultasApiComponent } from './pages/consultas-api/consultas-api.component';
-import { CaixaCompetenciaComponent } from './dashboards/financeiro/caixa-competencia/caixa-competencia.component';
+import { CaixaCompetenciaComponent } from './dashboards/caixa-competencia/caixa-competencia.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { VisoesComponent } from './cadastros/visoes/visoes.component';
 
 const routes: Routes = [
   { path: '', component: RedirectComponent, canActivate: [RedirectGuard], pathMatch: 'full' },
@@ -68,7 +69,8 @@ const routes: Routes = [
       { path: 'dashboards/propostas/painel-proposta', component: PainelPropostaComponent },
       { path: 'propostas/painel', component: PainelPropostaComponent },
       { path: 'consultas-api', component: ConsultasApiComponent },
-      { path: 'perfil', component: PerfilComponent }
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'visoes', component: VisoesComponent }
     ]
   }
 ];

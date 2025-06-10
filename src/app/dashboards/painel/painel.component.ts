@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
-import { FinanceiroComponent } from '../../painel/financeiro/financeiro.component';
+import { RelatorioDinamicoService } from '../../core/services/relatorio-dinamico.service';
+import { FinanceiroComponent } from './financeiro/financeiro.component';
 
 function addDays(date: Date, days: number): Date {
   const result = new Date(date);
@@ -13,7 +14,7 @@ function addDays(date: Date, days: number): Date {
   templateUrl: './painel.component.html',
   styleUrls: ['./painel.component.scss']
 })
-export class PainelComponent {
+export class PainelComponent implements OnInit {
   barOption: any = {
     title: { text: 'Vendas por Categoria' },
     tooltip: {},
@@ -179,9 +180,28 @@ export class PainelComponent {
     'bi-building'
   ];
 
-  constructor() {
+  empresasProjetos: any[] = [];
+  empresas: any[] = [];
+  projetosFiltrados: any[] = [];
+  empresaSelecionada: string = '';
+
+  filtros: any = {
+    visao_id: 'ANALISE_CUSTO',
+    tipo: 'caixa',
+    dataIni: '',
+    dataFim: '',
+    empIds: [],
+    projIds: []
+  };
+  visaoSelecionada: string = 'ANALISE_CUSTO';
+  @ViewChild(FinanceiroComponent) financeiroComp!: FinanceiroComponent;
+
+  metricasAPagar: any = [];
+
+  constructor(private relatorioService: RelatorioDinamicoService) {
     // Exemplo: intervalo padrão de 15/02/2025 a 26/06/2025
-    this.dateStart = '2025-02-15';
+   
+    this.dateStart = '2025-01-01';
     this.dateEnd = '2025-06-26';
     this.sliderStart = 0;
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
@@ -201,14 +221,72 @@ export class PainelComponent {
     };
   }
 
+  ngOnInit(): void {
+    this.relatorioService.getEmpresasProjetos().subscribe({
+      next: (dados) => {
+        this.empresasProjetos = dados;
+        // Popula empresas distintas
+        this.empresas = Array.from(
+          new Map(dados.filter(e => e.emp_id && e.emp_nome).map(e => [e.emp_id, { emp_id: e.emp_id, emp_nome: e.emp_nome }])).values()
+        );
+        this.atualizarProjetosFiltrados();
+      },
+      error: (err) => {
+        console.error('Erro ao buscar empresas e projetos:', err);
+      }
+    });
+
+    this.filtros.dataIni = this.dateStart;
+    this.filtros.dataFim = this.dateEnd;
+    this.filtros.tipo = this.tipoSelecionado;
+    this.filtros.visao_id = this.visaoSelecionada;
+    this.filtros.empIds = this.empresaSelecionada ? [this.empresaSelecionada] : [];
+    this.filtros.projIds = this.projetoSelecionado ? [this.projetoSelecionado] : [];
+    this.atualizarProjetosFiltrados();
+
+    // Adicione chamada para buscar os dados do painel e armazenar metricasAPagar
+    this.relatorioService.getRelatorioFluxoCaixa(this.filtros).subscribe({
+      next: (ret: any) => {
+        this.metricasAPagar = ret.metricasAPagar || [];
+      },
+      error: (err) => {
+        console.error('Erro ao buscar relatório dinâmico:', err);
+      }
+    });
+  }
+
+  atualizarProjetosFiltrados() {
+    if (!this.empresaSelecionada) {
+      // Todos os projetos de todas as empresas
+      this.projetosFiltrados = Array.from(
+        new Map(
+          this.empresasProjetos
+            .filter(p => p.proj_id && p.proj_nome)
+            .map(p => [p.proj_id, { proj_id: p.proj_id, proj_nome: p.proj_nome }])
+        ).values()
+      );
+    } else {
+      this.projetosFiltrados = this.empresasProjetos
+        .filter(p => p.emp_id == this.empresaSelecionada && p.proj_id && p.proj_nome)
+        .map(p => ({ proj_id: p.proj_id, proj_nome: p.proj_nome }));
+    }
+    // Se o projeto selecionado não está mais na lista, limpa
+    if (!this.projetosFiltrados.some(p => p.proj_id == this.projetoSelecionado)) {
+      this.projetoSelecionado = '';
+    }
+  }
+
+  onEmpresaChange() {
+    this.atualizarProjetosFiltrados();
+  }
+
   daysBetween(start: string, end: string): number {
     return Math.floor((new Date(end).getTime() - new Date(start).getTime()) / (1000 * 60 * 60 * 24));
   }
 
   onDateStartChange(event: any) {
-    /*
     this.dateStart = event.target.value;
-    this.sliderStart = 0;
+   /* this.sliderStart = 0;
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
     this.dateRangeMax = this.sliderEnd;
     this.sliderOptions = { ...this.sliderOptions, ceil: this.dateRangeMax };
@@ -216,8 +294,8 @@ export class PainelComponent {
   }
 
   onDateEndChange(event: any) {
-    /*
     this.dateEnd = event.target.value;
+    /*
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
     this.dateRangeMax = this.sliderEnd;
     this.sliderOptions = { ...this.sliderOptions, ceil: this.dateRangeMax };
@@ -245,5 +323,32 @@ export class PainelComponent {
 
   fecharSidebar() {
     this.sidebarAberto = false;
+  }
+
+  aplicarFiltros() {
+    this.filtros = {
+      visao_id: this.visaoSelecionada,
+      tipo: this.tipoSelecionado,
+      dataIni: this.dateStart,
+      dataFim: this.dateEnd,
+      empIds: this.empresaSelecionada ? [this.empresaSelecionada] : [],
+      projIds: this.projetoSelecionado ? [this.projetoSelecionado] : []
+    };
+    // Atualiza os dados do painel e metricasAPagar
+    this.relatorioService.getRelatorioFluxoCaixa(this.filtros).subscribe({
+      next: (ret: any) => {
+        this.metricasAPagar = ret.metricasAPagar || [];
+      },
+      error: (err) => {
+        console.error('Erro ao buscar relatório dinâmico:', err);
+      }
+    });
+    this.fecharSidebar();
+  }
+
+  onVisaoChangeMacro(novaVisao: string) {
+    this.visaoSelecionada = novaVisao;
+    this.aplicarFiltros();
+    
   }
 } 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,8 +18,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ContentWrapperComponent } from './layout/content-wrapper/content-wrapper.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
-import { PainelComponent } from './dashboards/financeiro/painel/painel.component';
-import { CaixaCompetenciaComponent } from './dashboards/financeiro/caixa-competencia/caixa-competencia.component';
+import { PainelComponent } from './dashboards/painel/painel.component';
+import { CaixaCompetenciaComponent } from './dashboards/caixa-competencia/caixa-competencia.component';
 import { PainelLayoutComponent } from './layout/painel-layout/painel-layout.component';
 import { ClientesListComponent } from './pages/clientes/clientes-list.component';
 import { ClienteFormComponent } from './pages/clientes/cliente-form.component';
@@ -37,6 +39,7 @@ import { HomeMobileModule } from './mobile-pages/home/home-mobile.module';
 import { FinanceiroMobileModule } from './mobile-pages/financeiro/financeiro-mobile.module';
 import { RedirectComponent } from './core/components/redirect.component';
 import { PagesModule } from './pages/pages.module';
+import { FinanceiroComponent } from './dashboards/painel/financeiro/financeiro.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { PagesModule } from './pages/pages.module';
     ModuloFormComponent,
     MenusListComponent,
     MenuFormComponent,
-    RedirectComponent
+    RedirectComponent,
+    FinanceiroComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,8 @@ import { PagesModule } from './pages/pages.module';
     PagesModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })

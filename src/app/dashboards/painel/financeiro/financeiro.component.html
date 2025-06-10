@@ -1,0 +1,110 @@
+<div class="painel-cards painel-cards-metricas">
+  <div class="painel-card-metrica">
+    <span class="painel-card-label">Caixa Anterior </span>
+    <span class="painel-card-valor">R$ {{ formatarBR(getMetricaValor('Saldo Anterior')) }}</span>
+  </div>
+  <div class="painel-card-metrica">
+    <span class="painel-card-label">Entradas  </span>
+    <span class="painel-card-valor">R$ {{ formatarBR(getMetricaValor('Entradas')) }}</span>
+  </div>
+  <div class="painel-card-metrica">
+    <span class="painel-card-label">Saídas </span>
+    <span class="painel-card-valor">R$ {{ formatarBR(getMetricaValor('Saídas')) }}</span>
+  </div>
+  <div class="painel-card-metrica">
+    <span class="painel-card-label">Saldo Atual <i class="bi bi-list-ul painel-card-icon-detail" (click)="openDetailModal('saldo-atual')"></i></span>
+    <span class="painel-card-valor">R$ {{ formatarBR(getMetricaValor('Saldo Atual')) }}</span>
+  </div>
+</div>
+
+<!-- Modal Flutuante de Detalhamento -->
+<div class="financeiro-detail-modal-overlay" *ngIf="showDetailModal" (click)="closeDetailModal()"></div>
+<div class="financeiro-detail-modal" *ngIf="showDetailModal">
+  <div class="financeiro-detail-modal-header">
+    <span>Detalhamento - {{ detailType | titlecase }}</span>
+    <button class="close-detail-modal" (click)="closeDetailModal()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="financeiro-detail-modal-content">
+    <div class="financeiro-toolbar">
+      <label for="visaoSelect" style="font-weight: 500; color: #223366; margin-right: 8px;">Visão:</label>
+      <select id="visaoSelect" [(ngModel)]="visaoSelecionada" (change)="onVisaoChange()" style="padding: 0px 1px; border-radius: 6px; border: 1px solid #e3e6f0; min-width: 120px;font-size:13px">
+        <option *ngFor="let visao of visoes" [value]="visao">{{ visao }}</option>
+      </select>
+      <label style="margin-left: 18px; font-weight: 400; font-size: 13px;">
+        <input type="checkbox" [(ngModel)]="exibirAnterior" (change)="onExibirAnteriorChange()" style="margin-right: 4px;" /> Exibir anterior
+      </label>
+    </div>
+    <div class="drilldown-table-scroll" style="max-height: 370px; overflow-y: auto; border-radius: 8px; border: 1px solid #e3e6f0; box-shadow: 0 1px 4px rgba(26,119,212,0.04); background-color: #f8fafc;">
+      <table class="drilldown-table">
+        <thead>
+          <tr>
+            <th class="sticky-col" style="font-size: 0.7rem;">Conta</th>
+            <th *ngFor="let mes of meses" style="text-align: right; font-size: 0.7rem;white-space: nowrap;">{{ mes }}</th>
+            <th class="sticky-col-right" style="font-size: 0.7rem; text-align: right;">Total</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 0.7rem;">
+          <ng-container *ngFor="let row of drilldownData">
+            <ng-template [ngTemplateOutlet]="drillRow" [ngTemplateOutletContext]="{ row: row, level: 0 }"></ng-template>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #drillRow let-row="row" let-level="level">
+      <tr [ngClass]="{'drilldown-totalizador': row.nivel === 1 && row.possui_filhos === 'N'}">
+        <td class="sticky-col" [style.paddingLeft.px]="level * 24">
+          <span *ngIf="row.children && row.children.length > 0" (click)="toggleExpand(row.id)" class="drilldown-toggle">
+            <i class="bi" [ngClass]="isExpanded(row.id) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
+          </span>
+          <span *ngIf="!row.children || row.children.length === 0" style="display: inline-block; width: 18px;"></span>
+          <span [ngClass]="{'drilldown-parent': row.children}"><b>{{ row.codigo }}</b> - {{ row.label }}</span>
+        </td>
+        <td *ngFor="let mes of meses" [style.text-align]="'right'" [style.font-weight]="row.children ? 'bold' : 'normal'">
+          {{ formatarBR(row[mes]) }}
+        </td>
+        <td class="sticky-col-right" [style.text-align]="'right'" [style.font-weight]="row.children ? 'bold' : 'normal'">
+          {{ formatarBR(row.total) }}
+        </td>
+      </tr>
+      <ng-container *ngIf="row.children && isExpanded(row.id)">
+        <ng-container *ngFor="let child of row.children">
+          <ng-template [ngTemplateOutlet]="drillRow" [ngTemplateOutletContext]="{ row: child, level: level + 1 }"></ng-template>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+  </div>
+</div>
+
+<div class="painel-graficos">
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+    <div class="painel-grafico-card">
+      <echarts [options]="barOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+    </div>
+    <div class="painel-grafico-card">
+      <echarts [options]="gaugeOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+      <div style="display: flex; justify-content: space-between; margin-top: 170px; min-width: 285px; position:fixed">
+        <div style="font-size: 11px; color: #223366; min-width: 80px; text-align: center; border: 1.5px solid #3f6; border-radius: 6px; padding: 2px 4px; background: #fff;">
+          Previsto<br>
+          <b>R$ {{ formatarBR(getMetricaAPagarValor('Previsto')) }}</b>
+        </div>
+        <div style="font-size: 11px; color: #223366; min-width: 80px; text-align: center; border: 1.5px solid #3f6; border-radius: 6px; padding: 2px 4px; background: #fff;">
+          Comprometido<br>
+          <b>R$ {{ formatarBR(getMetricaAPagarValor('Comprometido')) }}</b>
+        </div>
+      </div>
+    </div>
+    <div class="painel-grafico-card">
+      <echarts [options]="pieOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
+    </div>
+  </div>
+</div>
+<div class="painel-graficos" style="margin-top: 32px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
+    <div class="painel-grafico-card" style="flex: 2 1 0; min-width: 380px;">
+      <apx-chart [series]="apexLineSeries" [chart]="apexLineChart" [xaxis]="apexLineXaxis" [colors]="apexLineColors" [stroke]="apexLineStroke" [dataLabels]="apexLineDataLabels" [markers]="apexLineMarkers"></apx-chart>
+    </div>
+    <div class="painel-grafico-card">
+      <apx-chart [series]="apexBarSeries" [chart]="apexBarChart" [xaxis]="apexBarXaxis" [colors]="apexBarColors" [legend]="apexBarLegend" [plotOptions]="apexBarPlotOptions"></apx-chart>
+    </div>
+  </div>
+</div> 

@@ -14,6 +14,7 @@ export class ConsultasApiComponent {
   response: any = null;
   loading = false;
   error: string | null = null;
+  bulkData = false;
 
   tipos = ['GET', 'POST', 'PUT', 'PATCH'];
 
@@ -23,7 +24,7 @@ export class ConsultasApiComponent {
     this.loading = true;
     this.error = null;
     this.response = null;
-    const url = `${environment.apiUrl}/api/sienge?endpoint=${encodeURIComponent(this.endpoint)}&tipo=${this.tipo}`;
+    const url = `${environment.apiUrl}/api/sienge?endpoint=${encodeURIComponent(this.endpoint)}&tipo=${this.tipo}&bulkData=${this.bulkData}`;
     let req;
     if (this.tipo === 'GET') {
       req = this.http.get(url);

@@ -405,17 +405,14 @@
 }
 .painel-toolbar-group {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 120px;
-  flex: 1 1 120px;
+  flex-direction: column; 
+  min-width: 120px; 
   justify-content: flex-start;
 }
 .painel-toolbar-group label {
   align-self: flex-start;
 }
-.painel-toolbar-group:first-child {
-  min-width: 220px;
+.painel-toolbar-group:first-child { 
   max-width: 320px;
 }
 
@@ -438,13 +435,12 @@
 
 @media (max-width: 1100px) {
   .painel-toolbar-filtros {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: wrap; 
     padding: 10px 4px 8px 4px;
   }
   .painel-toolbar-group {
     min-width: 120px;
-    flex: 1 1 180px;
+     
   }
   .painel-toolbar-group:first-child {
     min-width: 180px;
@@ -491,5 +487,132 @@
     min-width: 100%;
     max-width: 100%;
     height: auto;
+  }
+}
+
+.painel-tabs {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(17, 59, 101, 0.18);
+  padding: 0 0px;
+  min-width: 320px;
+  margin-left: 18px;
+  text-align: center;
+}
+.painel-tabs-list {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.painel-tab {
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #223366;
+  border-bottom: 2px solid transparent;
+  transition: border 0.2s, color 0.2s;
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+.painel-tab.active {
+  color: #1A77D4;
+  border-bottom: 2.5px solid #1A77D4;
+  background: #f3f8ff;
+}
+.painel-tab-icon {
+  background: none;
+  border: none;
+  color: #1A77D4;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-flutuante {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(26,119,212,0.12);
+  z-index: 1200;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 0;
+}
+.sidebar-flutuante.aberto {
+  right: 0;
+}
+.sidebar-flutuante-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px 12px 24px;
+  border-bottom: 1px solid #e3e6f0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1A77D4;
+}
+.fechar-sidebar {
+  background: none;
+  border: none;
+  color: #223366;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.fechar-sidebar:hover {
+  background: #f3f8ff;
+}
+.sidebar-flutuante .painel-toolbar-filtros {
+  box-shadow: none;
+  border-radius: 0;
+  padding: 18px 24px 18px 24px;
+  margin: 0;
+  background: #fff;
+  flex-direction: column;
+  gap: 18px;
+}
+.sidebar-flutuante-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(16,27,69,0.18);
+  z-index: 1199;
+}
+@media (max-width: 600px) {
+  .sidebar-flutuante {
+    width: 100vw;
+    min-width: 0;
+    right: -100vw;
+  }
+  .sidebar-flutuante.aberto {
+    right: 0;
+  }
+}
+
+.painel-toolbar-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+@media (max-width: 700px) {
+  .painel-toolbar-row {
+    flex-direction: column;
+    gap: 8px;
   }
 }

@@ -1,0 +1,71 @@
+<div class="painel-container">
+  <div class="painel-header-row">
+    <div class="login-logo-container">
+      <img class="login-logo-small" src="https://marquesbezerra.com.br/wp-content/uploads/2024/06/MB-h-b.png" alt="Logo Autogab">
+    </div>
+    <!-- Sistema de Abas -->
+    <div class="painel-tabs">
+      <ul class="painel-tabs-list">
+        <li class="painel-tab" *ngFor="let tab of tabs; let i = index" [class.active]="selectedTab === i" (click)="selectTab(i)">
+          <span *ngIf="i < tabs.length - 1">
+            <i class="me-2 bi" [ngClass]="tabIcons[i]" style="margin-right: 3px;"></i>{{ tab }}
+          </span>
+           
+          <span *ngIf="i === tabs.length - 1">
+            <button class="painel-tab-icon" (click)="abrirSidebar($event)" title="Filtros">
+              <i class="bi bi-funnel"></i>
+            </button>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar Flutuante de Filtros -->
+    <div class="sidebar-flutuante" [class.aberto]="sidebarAberto">
+      <div class="sidebar-flutuante-header">
+        <span>Filtros</span>
+        <button class="fechar-sidebar" (click)="fecharSidebar()"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="painel-toolbar painel-toolbar-filtros">
+        <!-- Elemento Tipo acima do Intervalo -->
+        <div class="painel-toolbar-group">
+          <label class="painel-toolbar-label">Tipo</label>
+          <select class="painel-toolbar-select" [(ngModel)]="tipoSelecionado">
+            <option value="caixa">Caixa</option>
+            <option value="competencia">Competência</option>
+          </select>
+        </div>
+        <!-- Intervalo -->
+        <div class="painel-toolbar-group">
+          <label class="painel-toolbar-label">Intervalo</label>
+          <div class="painel-toolbar-dates-row">
+            <input type="date" [value]="dateStart" (blur)="onDateStartChange($event)" class="painel-toolbar-date" />
+            <input type="date" [value]="dateEnd" (blur)="onDateEndChange($event)" class="painel-toolbar-date" />
+          </div>
+          <div class="painel-toolbar-slider" style="display: none;">
+            <ngx-slider [(value)]="sliderStart" [(highValue)]="sliderEnd" [options]="sliderOptions" (userChangeEnd)="onSliderChange()"></ngx-slider>
+          </div>
+        </div>
+        <!-- Projeto e Centro de Custo lado a lado -->
+        <div class="painel-toolbar-row">
+          <div class="painel-toolbar-group" style="flex: 1; margin-right: 8px;">
+            <label class="painel-toolbar-label">Empresa</label>
+            <select class="painel-toolbar-select" [(ngModel)]="empresaSelecionada" (change)="onEmpresaChange()">
+              <option [value]="''">Todas</option>
+              <option *ngFor="let emp of empresas" [value]="emp.emp_id">{{ emp.emp_id }}.  {{ emp.emp_nome }}</option>
+            </select>
+          </div>
+          <div class="painel-toolbar-group" style="flex: 1;">
+            <label class="painel-toolbar-label">Projeto</label>
+            <select class="painel-toolbar-select" [(ngModel)]="projetoSelecionado">
+              <option [value]="''">Todos</option>
+              <option *ngFor="let proj of projetosFiltrados" [value]="proj.proj_id">{{ proj.proj_id }}. {{ proj.proj_nome }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="margin-top: 12px; width: 100%;" (click)="aplicarFiltros()">Aplicar</button>
+    </div>
+    <div class="sidebar-flutuante-overlay" *ngIf="sidebarAberto" (click)="fecharSidebar()"></div>
+  </div>
+  <app-financeiro [filtros]="filtros" [metricasAPagar]="metricasAPagar" (visaoChange)="onVisaoChangeMacro($event)"></app-financeiro>
+</div> 
