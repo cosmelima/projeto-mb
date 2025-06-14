@@ -41,6 +41,8 @@ import { RedirectComponent } from './core/components/redirect.component';
 import { PagesModule } from './pages/pages.module';
 import { FinanceiroComponent } from './dashboards/painel/financeiro/financeiro.component';
 
+registerLocaleData(ptBr, 'pt-BR');
+
 @NgModule({
   declarations: [
     AppComponent,

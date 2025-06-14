@@ -1,4 +1,92 @@
 <div class="financeiro-mobile-bg">
-  <h2>Financeiro</h2>
-  <p>Página financeira mobile em construção.</p>
+  <div class="financeiro-mobile-tabs">
+    <div class="financeiro-mobile-tab" [class.active]="abaSelecionada === 0" (click)="selecionarAba(0)">
+      Dashboard
+    </div>
+    <div class="financeiro-mobile-tab" [class.active]="abaSelecionada === 1" (click)="selecionarAba(1)">
+      Visões
+    </div>
+    <div class="financeiro-mobile-tab filtro" (click)="abrirFiltro()">
+      <i class="fa fa-filter"></i>
+    </div>
+  </div>
+  <!-- Conteúdo das abas -->
+  <ng-container *ngIf="abaSelecionada === 0">
+    <div class="financeiro-mobile-section-title" style="margin-bottom: 2px;">Realizado</div>
+    <div class="financeiro-mobile-cards">
+      <div class="financeiro-mobile-card">
+        <span>Caixa Anterior</span>
+        <strong>R$ {{ saldoAnterior | number:'1.2-2' }}</strong>
+      </div>
+      <div class="financeiro-mobile-card">
+        <span>Entradas</span>
+        <strong>R$ {{ entradas | number:'1.2-2' }}</strong>
+      </div>
+      <div class="financeiro-mobile-card negativo">
+        <span>Saídas</span>
+        <strong>R$ {{ saidas | number:'1.2-2' }}</strong>
+      </div>
+      <div class="financeiro-mobile-card">
+        <span>Saldo Atual</span>
+        <strong>R$ {{ saldoAtual | number:'1.2-2' }}</strong>
+      </div>
+    </div>
+    <div class="financeiro-mobile-section-title" style="margin-bottom: 2px; margin-top: 8px;">Projetado</div>
+    <div class="financeiro-mobile-graficos">
+      <div class="mini-cards-gauge-mobile">
+        <div class="mini-card-mobile previsto">
+          Projetado<br>
+          <b>R$ {{ previsto + comprometido | number:'1.2-2' }}</b>
+        </div>
+        <div class="mini-card-mobile previsto">
+          Previsto<br>
+          <b>R$ {{ previsto | number:'1.2-2' }}</b>
+        </div>
+        <div class="mini-card-mobile comprometido">
+          Comprometido<br>
+          <b>R$ {{ comprometido | number:'1.2-2' }}</b>
+        </div>
+      </div>
+      <div class="grafico-mobile">
+        <div class="tabela-analise-custos-mobile">
+          <div class="tabela-analise-custos-header">
+            <span>Categoria</span>
+            <span>Valor</span>
+            <span>%</span>
+          </div>
+          <div *ngFor="let item of analiseCustos" class="tabela-analise-custos-row">
+            <span>{{ item.nome }}</span>
+            <span>R$ {{ item.valor | number:'1.2-2' }}</span>
+            <span>{{ item.percentual | number:'1.1-2' }}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="grafico-mobile">
+        <div echarts [options]="barOption" class="echart-bar"></div>
+      </div>
+      <div class="grafico-mobile">
+        <div echarts [options]="barChartOptions" class="echart-bar"></div>
+      </div>
+      <div class="grafico-mobile">
+        <div echarts [options]="lineChartOptions" class="echart-line"></div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="abaSelecionada === 1">
+    <div class="financeiro-mobile-visoes">
+      <!-- Conteúdo da aba Visões (placeholder) -->
+      <p style="text-align:center; color:#223366; margin: 32px 0;">Em breve: Visões financeiras customizadas.</p>
+    </div>
+  </ng-container>
+  <!-- Popup/modal de filtro -->
+  <div class="financeiro-mobile-filtro-modal-overlay" *ngIf="filtroAberto" (click)="fecharFiltro()"></div>
+  <div class="financeiro-mobile-filtro-modal" *ngIf="filtroAberto">
+    <div class="filtro-modal-header">
+      <span>Filtros</span>
+      <button class="close-filtro-modal" (click)="fecharFiltro()"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="filtro-modal-content">
+      <p style="text-align:center; color:#223366; margin: 32px 0;">Em breve: Filtros avançados.</p>
+    </div>
+  </div>
 </div> 

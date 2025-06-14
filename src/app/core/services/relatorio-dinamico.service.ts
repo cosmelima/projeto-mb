@@ -17,6 +17,11 @@ export class RelatorioDinamicoService {
     return this.http.post<any[]>(this.apiUrl+'/api/fluxo-caixa-dinamico/relatorio-fluxo-caixa', filtros);
   }
 
+  getFluxoCaixaUnificado(filtros: any): Observable<any[]> {
+    return this.http.post<any[]>(this.apiUrl+'/api/fluxo-caixa-dinamico/fluxo-caixa-unificado', filtros);
+  }
+
+
   getvisoes(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl+'/api/fluxo-caixa-dinamico/visoes', {});
   }

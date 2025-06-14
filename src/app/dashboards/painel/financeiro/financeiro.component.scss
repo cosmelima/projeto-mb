@@ -39,21 +39,23 @@
 }
 .painel-card-icon-detail {
   font-size: 1.1em;
-  color: #e3e6f0;
+  /* color: #e3e6f0; */
   margin-left: 8px;
   cursor: pointer;
   transition: color 0.2s;
   border-radius: 10px;
-  border: 1px solid; 
-  background: #0000004f; 
+  border: 1px solid;
+  /* background: rgba(0, 0, 0, 0.3098039216); */
   height: 28px;
   width: 28px;
   position: relative;
-  left: 34px;
-  top: -8px;
+  /* left: 34px; */
+  /* top: -8px; */
+  padding-left: 3px;
+  margin-left: 35px;
 }
 .painel-card-icon-detail:hover {
-  color: #fff;
+  color: #c4a81b;
 }
 .painel-card-valor {
   color: #fff;
@@ -271,4 +273,34 @@
   background: #f8fafc;
   border-left: 1px solid #e3e6f0;
   box-shadow: -2px 0 4px -2px #e3e6f0;
+}
+.mini-cards-gauge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  pointer-events: none;
+}
+.mini-card {
+  font-size: 10px;
+  color: #223366;
+  min-width: 80px;
+  text-align: center;
+  border: 1.5px solid #3f6;
+  border-radius: 6px;
+  padding: 2px 4px;
+  background: #fff;
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(26,119,212,0.08);
+  white-space: nowrap;
+}
+.mini-card.previsto {
+  margin-left: 8px;
+}
+.mini-card.comprometido {
+  margin-right: 8px;
 } 

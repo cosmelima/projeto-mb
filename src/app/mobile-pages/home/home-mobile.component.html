@@ -9,7 +9,7 @@
       <span class="home-mobile-welcome">Bem-vindo de volta,</span>
       <span class="home-mobile-username">{{ userName }}</span>
       <div class="home-mobile-balance-label">Saldo Atual</div>
-      <div class="home-mobile-balance">R$ 1.245,00</div>
+      <div class="home-mobile-balance">R$ {{ getMetricaValor('Saldo Atual') | number:'1.2-2' }}</div>
       <div class="home-mobile-header-desc" style="display: none;">
         Acompanhe dados de obras, financeiro, relatórios e muito mais em um só lugar!
       </div>
@@ -32,7 +32,7 @@
       <i class="fa fa-file-invoice"></i>
       <span>Relatórios</span>
     </a>
-    <a class="home-mobile-shortcut" routerLink="/financeiro2">
+    <a class="home-mobile-shortcut" routerLink="/financeiro">
       <i class="fa fa-chart-bar"></i>
       <span>Financeiro</span>
     </a>
@@ -59,34 +59,35 @@
     <div class="home-mobile-transaction">
       <div class="home-mobile-transaction-icon"><i class="fa fa-money-bill"></i></div>
       <div class="home-mobile-transaction-info">
-        <div class="home-mobile-transaction-title">Entrada em Caixa</div>
-        <div class="home-mobile-transaction-date">10.05.2025</div>
+        <div class="home-mobile-transaction-title">Entrada</div>
+        <div class="home-mobile-transaction-date">No Mês </div>
       </div>
-      <div class="home-mobile-transaction-value">R$ 35.000,00</div>
+      <div class="home-mobile-transaction-value">R$ {{ getMetricaValor('Entradas') | number:'1.2-2' }}</div>
     </div>
     <div class="home-mobile-transaction">
       <div class="home-mobile-transaction-icon"><i class="fa fa-dollar-sign"></i></div>
       <div class="home-mobile-transaction-info">
-        <div class="home-mobile-transaction-title">Pagamento</div>
-        <div class="home-mobile-transaction-date">10.05.2025</div>
+        <div class="home-mobile-transaction-title">Saída</div>
+        <div class="home-mobile-transaction-date">No Mês </div>
       </div>
-      <div class="home-mobile-transaction-value">R$ 5.000,00</div>
-    </div>
-    <div class="home-mobile-transaction">
-      <div class="home-mobile-transaction-icon"><i class="fa fa-chair"></i></div>
-      <div class="home-mobile-transaction-info">
-        <div class="home-mobile-transaction-title">Desp. Escritório</div>
-        <div class="home-mobile-transaction-date">10.05.2025</div>
-      </div>
-      <div class="home-mobile-transaction-value">R$ 15.000,00</div>
+      <div class="home-mobile-transaction-value negative-value">R$ {{ getMetricaValor('Saídas') | number:'1.2-2' }}</div>
     </div>
     <div class="home-mobile-transaction">
       <div class="home-mobile-transaction-icon"><i class="fa fa-sync"></i></div>
       <div class="home-mobile-transaction-info">
-        <div class="home-mobile-transaction-title">Assinatura Mensal</div>
-        <div class="home-mobile-transaction-date">10.05.2025</div>
+        <div class="home-mobile-transaction-title">A Receber</div>
+        <div class="home-mobile-transaction-date">No Mês </div>
       </div>
-      <div class="home-mobile-transaction-value">R$ 3.400,00</div>
+      <div class="home-mobile-transaction-value">R$ {{ getMetricaAPagarValor('a_receber_mes') | number:'1.2-2' }}</div>
     </div>
+    <div class="home-mobile-transaction">
+      <div class="home-mobile-transaction-icon"><i class="fa fa-chair"></i></div>
+      <div class="home-mobile-transaction-info">
+        <div class="home-mobile-transaction-title">A Pagar</div>
+        <div class="home-mobile-transaction-date">No Mês </div>
+      </div>
+      <div class="home-mobile-transaction-value negative-value">R$ {{ getMetricaAPagarValor('a_pagar_mes') | number:'1.2-2' }}</div>
+    </div>
+   
   </div>
 </div> 

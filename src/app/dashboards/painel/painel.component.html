@@ -27,7 +27,7 @@
       </div>
       <div class="painel-toolbar painel-toolbar-filtros">
         <!-- Elemento Tipo acima do Intervalo -->
-        <div class="painel-toolbar-group">
+        <div class="painel-toolbar-group" style="display: none;">
           <label class="painel-toolbar-label">Tipo</label>
           <select class="painel-toolbar-select" [(ngModel)]="tipoSelecionado">
             <option value="caixa">Caixa</option>
@@ -62,8 +62,10 @@
             </select>
           </div>
         </div>
+        <div style="display: flex; justify-content: center; width: 100%; margin-top: 170px;">
+          <button class="btn btn-primary" style="width: 180px;" (click)="aplicarFiltros()">Aplicar</button>
+        </div>
       </div>
-      <button class="btn btn-primary" style="margin-top: 12px; width: 100%;" (click)="aplicarFiltros()">Aplicar</button>
     </div>
     <div class="sidebar-flutuante-overlay" *ngIf="sidebarAberto" (click)="fecharSidebar()"></div>
   </div>

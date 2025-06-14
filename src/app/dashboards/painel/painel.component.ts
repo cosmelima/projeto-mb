@@ -197,12 +197,14 @@ export class PainelComponent implements OnInit {
   @ViewChild(FinanceiroComponent) financeiroComp!: FinanceiroComponent;
 
   metricasAPagar: any = [];
+  array_metricas: any = [];
 
   constructor(private relatorioService: RelatorioDinamicoService) {
     // Exemplo: intervalo padrão de 15/02/2025 a 26/06/2025
-   
-    this.dateStart = '2025-01-01';
-    this.dateEnd = '2025-06-26';
+    const now = new Date();
+    const year = now.getFullYear();
+    this.dateStart = `${year}-01-01`;
+    this.dateEnd = `${year}-12-31`;
     this.sliderStart = 0;
     this.sliderEnd = this.daysBetween(this.dateStart, this.dateEnd);
     this.dateRangeMax = this.sliderEnd;
@@ -236,6 +238,22 @@ export class PainelComponent implements OnInit {
       }
     });
 
+    // Carrega filtros do localStorage se existirem
+    const filtrosSalvos = localStorage.getItem('painel-filtros');
+    if (filtrosSalvos) {
+      try {
+        const filtros = JSON.parse(filtrosSalvos);
+        this.visaoSelecionada = filtros.visao_id || this.visaoSelecionada;
+        this.tipoSelecionado = filtros.tipo || this.tipoSelecionado;
+        this.dateStart = filtros.dataIni || this.dateStart;
+        this.dateEnd = filtros.dataFim || this.dateEnd;
+        this.empresaSelecionada = (filtros.empIds && filtros.empIds[0]) || '';
+        this.projetoSelecionado = (filtros.projIds && filtros.projIds[0]) || '';
+      } catch (e) {
+        // Se der erro, ignora e usa padrão
+      }
+    }
+
     this.filtros.dataIni = this.dateStart;
     this.filtros.dataFim = this.dateEnd;
     this.filtros.tipo = this.tipoSelecionado;
@@ -244,13 +262,15 @@ export class PainelComponent implements OnInit {
     this.filtros.projIds = this.projetoSelecionado ? [this.projetoSelecionado] : [];
     this.atualizarProjetosFiltrados();
 
-    // Adicione chamada para buscar os dados do painel e armazenar metricasAPagar
+    // NOVO: Atualizar metricasAPagar/gaugeOption ao carregar filtros salvos
     this.relatorioService.getRelatorioFluxoCaixa(this.filtros).subscribe({
       next: (ret: any) => {
         this.metricasAPagar = ret.metricasAPagar || [];
+        this.array_metricas = ret.metricas;
       },
       error: (err) => {
         console.error('Erro ao buscar relatório dinâmico:', err);
+        this.filtros = { ...this.filtros };
       }
     });
   }
@@ -326,7 +346,8 @@ export class PainelComponent implements OnInit {
   }
 
   aplicarFiltros() {
-    this.filtros = {
+    // Salva os filtros no localStorage
+    const novoFiltro = {
       visao_id: this.visaoSelecionada,
       tipo: this.tipoSelecionado,
       dataIni: this.dateStart,
@@ -334,15 +355,25 @@ export class PainelComponent implements OnInit {
       empIds: this.empresaSelecionada ? [this.empresaSelecionada] : [],
       projIds: this.projetoSelecionado ? [this.projetoSelecionado] : []
     };
-    // Atualiza os dados do painel e metricasAPagar
-    this.relatorioService.getRelatorioFluxoCaixa(this.filtros).subscribe({
+    localStorage.setItem('painel-filtros', JSON.stringify(novoFiltro));
+    // Atualiza as métricas primeiro, só depois atualiza o filtro (Input)
+    this.relatorioService.getRelatorioFluxoCaixa(novoFiltro).subscribe({
       next: (ret: any) => {
         this.metricasAPagar = ret.metricasAPagar || [];
+        this.array_metricas = ret.metricas;
+        this.filtros = { ...novoFiltro }; // Só agora atualiza o Input, disparando atualização do filho
       },
       error: (err) => {
         console.error('Erro ao buscar relatório dinâmico:', err);
+        this.filtros = { ...novoFiltro };
       }
     });
+    // Atualiza os gráficos de pizza e barras do Financeiro
+    setTimeout(() => {
+      if (this.financeiroComp && this.financeiroComp.atualizarGraficosResumo) {
+        this.financeiroComp.atualizarGraficosResumo();
+      }
+    }, 0);
     this.fecharSidebar();
   }
 
