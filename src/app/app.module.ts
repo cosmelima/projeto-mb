@@ -32,7 +32,7 @@ import { MenusListComponent } from './pages/menus/menus-list.component';
 import { MenuFormComponent } from './pages/menus/menu-form.component';
 import { CadastrosModule } from './cadastros/cadastros.module';
 import { PropostasDashboardModule } from './dashboards/propostas/propostas.module';
-import { AuthInterceptor } from './core/services/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { LoginMobileModule } from './pages/login-mobile/login-mobile.module';
 import { HomeMobileModule } from './mobile-pages/home/home-mobile.module';
@@ -87,7 +87,11 @@ registerLocaleData(ptBr, 'pt-BR');
     PagesModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
