@@ -69,5 +69,5 @@
     </div>
     <div class="sidebar-flutuante-overlay" *ngIf="sidebarAberto" (click)="fecharSidebar()"></div>
   </div>
-  <app-financeiro [filtros]="filtros" [metricasAPagar]="metricasAPagar" (visaoChange)="onVisaoChangeMacro($event)"></app-financeiro>
+  <app-financeiro [filtros]="filtros" [metricasAPagar]="metricasAPagar" (visaoChange)="onVisaoChangeMacro($event)" (tipoAnaliseChange)="onTipoAnaliseChange($event)"></app-financeiro>
 </div> 

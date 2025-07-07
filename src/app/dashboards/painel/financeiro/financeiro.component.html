@@ -1,4 +1,234 @@
-<div class="painel-cards painel-cards-metricas">
+<!-- Dropdown Tipo de Análise -->
+<div class="tipo-analise-dropdown-container">
+  <button class="tipo-analise-trigger" (click)="toggleTipoAnaliseDropdown()">
+    <span>{{ tipoAnaliseSelecionado }}</span>
+    <i class="bi" [ngClass]="tipoAnaliseDropdownAberto ? 'bi-caret-up-fill' : 'bi-caret-down-fill'"></i>
+  </button>
+  <div class="tipo-analise-dropdown" [class.aberto]="tipoAnaliseDropdownAberto">
+    <div class="tipo-analise-option" (click)="selecionarTipoAnalise('Caixa')">
+      <i class="bi bi-cash-coin"></i>
+      <span>Caixa</span>
+    </div>
+    <div class="tipo-analise-option" (click)="selecionarTipoAnalise('Competência')">
+      <i class="bi bi-calendar-check"></i>
+      <span>Competência</span>
+    </div>
+  </div>
+</div>
+
+<!-- Novas Métricas do Fluxo de Caixa Unificado -->
+<div class="painel-cards painel-cards-metricas-unificado">
+  <div class="painel-card-metrica-unificado" (click)="togglePosicaoCaixaDropdown($event)" style="cursor:pointer; position:relative;">
+    <span class="painel-card-label">Posição de Caixa</span>
+    <span class="painel-card-valor">{{ formatarMetricaUnificado(metricasFluxoCaixaUnificado.posicaoCaixa) }}</span>
+  </div>
+  <div class="painel-card-metrica-unificado" (click)="toggleFaturamentoDropdown($event)" style="cursor:pointer; position:relative;">
+    <span class="painel-card-label">Faturamento</span>
+    <span class="painel-card-valor">{{ formatarMetricaUnificado(metricasFluxoCaixaUnificado.faturamento) }}</span>
+  </div>
+  <div class="painel-card-metrica-unificado" (click)="toggleRecebimentoDropdown($event)" style="cursor:pointer; position:relative;">
+    <span class="painel-card-label">Recebimento</span>
+    <span class="painel-card-valor">{{ formatarMetricaUnificado(metricasFluxoCaixaUnificado.recebimento) }}</span>
+  </div>
+  <div class="painel-card-metrica-unificado" (click)="togglePagamentoDropdown($event)" style="cursor:pointer; position:relative;">
+    <span class="painel-card-label">Pagamento</span>
+    <span class="painel-card-valor">{{ formatarMetricaUnificado(metricasFluxoCaixaUnificado.pagamento) }}</span>
+  </div>
+</div>
+
+<!-- Dropdown flutuante de drilldown da Posição de Caixa -->
+<div *ngIf="showPosicaoCaixaDropdown" class="posicao-caixa-dropdown" [ngStyle]="{
+  top: posicaoCaixaDropdownPosition.top + 'px',
+  left: posicaoCaixaDropdownPosition.left + 'px'
+}">
+  <div class="drilldown-tree">
+    <ng-container *ngFor="let empresa of posicaoCaixaDrilldownTree">
+      <div class="drilldown-node nivel1">
+        <span class="drilldown-toggle" (click)="toggleDrilldownNode(empresa.id)">
+          <i class="bi" [ngClass]="isDrilldownNodeExpanded(empresa.id) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
+        </span>
+        <span class="drilldown-label">{{ empresa.label }}</span>
+        <span class="drilldown-valor">{{ formatarMetricaUnificado(empresa.valor) }}</span>
+      </div>
+      <div *ngIf="isDrilldownNodeExpanded(empresa.id)">
+        <ng-container *ngFor="let conta of empresa.children">
+          <div class="drilldown-node nivel2">
+            <span class="drilldown-toggle" (click)="toggleDrilldownNode(conta.id)">
+              <i class="bi" [ngClass]="isDrilldownNodeExpanded(conta.id) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
+            </span>
+            <span class="drilldown-label">{{ conta.label }}</span>
+            <span class="drilldown-valor">{{ formatarMetricaUnificado(conta.valor) }}</span>
+          </div>
+          <div *ngIf="isDrilldownNodeExpanded(conta.id)">
+            <ng-container *ngFor="let cc of conta.children">
+              <div class="drilldown-node nivel3">
+                <span class="drilldown-toggle" (click)="toggleDrilldownNode(cc.id)">
+                  <i class="bi" [ngClass]="isDrilldownNodeExpanded(cc.id) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
+                </span>
+                <span class="drilldown-label">{{ cc.label }}</span>
+                <span class="drilldown-valor">{{ formatarMetricaUnificado(cc.valor) }}</span>
+              </div>
+              <div *ngIf="isDrilldownNodeExpanded(cc.id)">
+                <ng-container *ngFor="let reg of cc.children">
+                  <div class="drilldown-node nivel4">
+                    <span class="drilldown-label">{{ reg.label }}</span>
+                    <span class="drilldown-valor">{{ formatarMetricaUnificado(reg.valor) }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Dropdown flutuante de drilldown do Faturamento -->
+<div *ngIf="showFaturamentoDropdown" class="faturamento-dropdown posicao-caixa-dropdown" [ngStyle]="{
+  top: faturamentoDropdownPosition.top + 'px',
+  left: faturamentoDropdownPosition.left + 'px',
+  width: faturamentoDropdownPosition.width + 'px'
+}">
+  <div class="drilldown-tree">
+    <ng-container *ngFor="let empresa of faturamentoDrilldownTree">
+      <div class="drilldown-node nivel1">
+        <span class="drilldown-toggle" (click)="toggleFaturamentoNode(empresa.id)">
+          <i class="bi" [ngClass]="isFaturamentoNodeExpanded(empresa.id) ? 'bi-caret-down-fill' : 'bi-caret-right-fill'"></i>
+        </span>
+        <span class="drilldown-label">{{ empresa.label }}</span>
+        <span class="drilldown-valor">{{ formatarMetricaUnificado(empresa.valor) }}</span>
+      </div>
+      <div *ngIf="isFaturamentoNodeExpanded(empresa.id)">
+        <ng-container *ngFor="let projeto of empresa.children">
+          <div class="drilldown-node nivel2" [ngClass]="{'projeto-selecionado': projetoFaturamentoSelecionado && projetoFaturamentoSelecionado.empresa === empresa.label && projetoFaturamentoSelecionado.projeto === projeto.label}" (click)="onSelecionarProjetoFaturamento(empresa.label, projeto.label)">
+            <span class="drilldown-toggle">
+              <i class="bi bi-bar-chart"></i>
+            </span>
+            <span class="drilldown-label">{{ projeto.label }}</span>
+            <span class="drilldown-valor">{{ formatarMetricaUnificado(projeto.valor) }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Dropdown flutuante de drilldown do Recebimento -->
+<div *ngIf="showRecebimentoDropdown" class="recebimento-dropdown posicao-caixa-dropdown" [ngStyle]="{
+  top: recebimentoDropdownPosition.top + 'px',
+  left: recebimentoDropdownPosition.left + 'px' 
+}">
+  <div class="drilldown-tree">
+    <div class="drilldown-node nivel1" style="font-size:1.05em; font-weight:600; color:#1A77D4;">Projetos</div>
+    <ng-container *ngFor="let proj of recebimentoDrilldownList">
+      <div class="drilldown-node nivel2 recebimento-projeto-bar">
+        <div class="recebimento-projeto-label">{{ proj.projeto }}</div>
+        <div class="recebimento-bar-container" style="width: 100%;">
+          <div class="recebimento-bar-bg" (click)="onSelecionarProjetoRecebimento(proj.projeto)" style="cursor:pointer; display: flex; align-items: center;">
+            <i class="bi bi-bar-chart" style="margin-left: 8px; margin-right: 6px; color: #1A77D4; font-size: 1.1em;"></i>
+            <div class="recebimento-bar-fg" [style.width]="proj.percentual + '%'">
+              <ng-container *ngIf="proj.percentual > 0">
+                <span class="recebido-inside-bar">{{ formatarMetricaUnificado(proj.valorRecebido) }}</span>
+                <span class="recebimento-bar-percent">{{ proj.percentual }}%</span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="recebimento-bar-values">
+            <span class="recebido"> </span>
+            <span class="total"> {{ formatarMetricaUnificado(proj.valorTotal) }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Dropdown flutuante de drilldown do Pagamento -->
+<div *ngIf="showPagamentoDropdown" class="pagamento-dropdown posicao-caixa-dropdown" [ngStyle]="{
+  top: pagamentoDropdownPosition.top + 'px',
+  left: (pagamentoDropdownPosition.left - 100) + 'px' 
+}">
+  <div class="drilldown-tree">
+    <div class="drilldown-node nivel1" style="font-size:1.05em; font-weight:600; color:#1A77D4;">Projetos</div>
+    <ng-container *ngFor="let proj of pagamentoDrilldownList">
+      <div class="drilldown-node nivel2 pagamento-projeto-bar">
+        <div class="pagamento-projeto-label">{{ proj.projeto }}</div>
+        <div class="pagamento-bar-container" style="width: 100%;">
+          <div class="pagamento-bar-bg" (click)="onSelecionarProjetoPagamento(proj.projeto)" style="cursor:pointer; display: flex; align-items: center;">
+            <i class="bi bi-bar-chart" style="margin-left: 8px; margin-right: 6px; color: #FF4560; font-size: 1.1em;"></i>
+            <div class="pagamento-bar-fg" [style.width]="proj.percentual + '%'">
+              <ng-container *ngIf="proj.percentual > 0">
+                <span class="pago-inside-bar">{{ formatarMetricaUnificado(proj.valorPago) }}</span>
+                <span class="pagamento-bar-percent">{{ proj.percentual }}%</span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="pagamento-bar-values">
+            <span class="pago"></span>
+            <span class="total"> {{ formatarMetricaUnificado(proj.valorTotal) }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div id="graficos-projeto">
+  <echarts *ngIf="barOptionProjetoFaturamento" [options]="barOptionProjetoFaturamento" [autoResize]="true" style="width:80%;max-width:900px;height:320px;margin:0 auto 24px auto;display:block;"></echarts>
+  <echarts *ngIf="barOptionProjetoRecebimento && !barOptionProjetoFaturamento" [options]="barOptionProjetoRecebimento" [autoResize]="true" style="width:80%;max-width:900px;height:320px;margin:0 auto 24px auto;display:block;"></echarts>
+  <echarts *ngIf="barOptionProjetoPagamento && !barOptionProjetoFaturamento && !barOptionProjetoRecebimento" [options]="barOptionProjetoPagamento" [autoResize]="true" style="width:80%;max-width:900px;height:320px;margin:0 auto 24px auto;display:block;"></echarts>
+</div>
+<!-- Gráfico de fluxo completo -->
+<div class="painel-grafico-card" style="margin: 0 auto 32px auto; max-width: 900px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 12px; flex-wrap: wrap;">
+    <span style="font-weight: 600; font-size: 1.1rem; color: #1A77D4; text-align: left;">FLUXO DE CAIXA</span>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <select [(ngModel)]="empresaSelecionada" (change)="onSelecionarEmpresa(empresaSelecionada)" style="padding: 2px 8px; border-radius: 6px; border: 1px solid #e3e6f0; min-width: 120px; font-size: 0.8em;">
+        <option [ngValue]="null">Todas Empresas</option>
+        <option *ngFor="let emp of empresasDisponiveis" [ngValue]="emp.id">{{ emp.nome }}</option>
+      </select>
+      <select [(ngModel)]="projetoSelecionado" (change)="onSelecionarProjeto(projetoSelecionado)" style="padding: 2px 8px; border-radius: 6px; border: 1px solid #e3e6f0; min-width: 120px; font-size: 0.8em;">
+        <option [ngValue]="null">Todos Projetos</option>
+        <option *ngFor="let proj of projetosDisponiveis" [ngValue]="proj">{{ proj }}</option>
+      </select>
+    </div>
+    <i class="bi bi-list-ul painel-card-icon-detail" (click)="openDetailModal('saldo-atual')"></i>
+  </div>
+  <apx-chart 
+    *ngIf="apexLineSeriesFluxoCompleto"
+    [series]="apexLineSeriesFluxoCompleto"
+    [chart]="apexLineChart"
+    [xaxis]="apexLineXaxisFluxoCompleto"
+    [yaxis]="apexLineYAxis"
+    [colors]="apexLineColors"
+    [stroke]="apexLineStroke"
+    [dataLabels]="apexLineDataLabels"
+    [markers]="apexLineMarkers"
+    [plotOptions]="{
+      bar: {
+        horizontal: false,
+        columnWidth: '50%',
+        borderRadius: 5,
+        borderRadiusApplication: 'end',
+        borderRadiusWhenStacked: 'last'
+      }
+    }"
+    [legend]="{ position: 'top', horizontalAlign: 'center' }"
+    [tooltip]="{ shared: true, intersect: false }">
+  </apx-chart>
+  <!-- Mensagem quando não há dados -->
+  <div *ngIf="!apexLineSeriesFluxoCompleto || apexLineSeriesFluxoCompleto.length === 0" 
+       style="display: flex; align-items: center; justify-content: center; height: 300px; color: #666; font-style: italic;">
+    <div style="text-align: center;">
+      <i class="bi bi-graph-down" style="font-size: 3rem; margin-bottom: 1rem; display: block; color: #ccc;"></i>
+      <p>Nenhum dado disponível para os filtros selecionados</p>
+      <small>Selecione outras opções de empresa ou projeto</small>
+    </div>
+  </div>
+</div>
+
+<div class="painel-cards painel-cards-metricas" style="display: none;">
   <div class="painel-card-metrica">
     <span class="painel-card-label">Caixa Anterior </span>
     <span class="painel-card-valor">R$ {{ formatarBR(getMetricaValor('Saldo Anterior')) }}</span>
@@ -25,7 +255,7 @@
     <button class="close-detail-modal" (click)="closeDetailModal()"><i class="bi bi-x-lg"></i></button>
   </div>
   <div class="financeiro-detail-modal-content">
-    <div class="financeiro-toolbar">
+    <div class="financeiro-toolbar" style="display: none;">
       <label for="visaoSelect" style="font-weight: 500; color: #223366; margin-right: 8px;">Visão:</label>
       <select id="visaoSelect" [(ngModel)]="visaoSelecionada" (change)="onVisaoChange()" style="padding: 0px 1px; border-radius: 6px; border: 1px solid #e3e6f0; min-width: 120px;font-size:13px">
         <option *ngFor="let visao of visoes" [value]="visao">{{ visao }}</option>
@@ -75,7 +305,7 @@
   </div>
 </div>
 
-<div class="painel-graficos">
+<div style="display: none;" class="painel-graficos">
   <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
     <div class="painel-grafico-card" style="position: relative;">
       <echarts [options]="gaugeOption" [autoResize]="true" style="width: 100%; height: 100%; min-height: 220px;"></echarts>
@@ -104,7 +334,7 @@
     
   </div>
 </div>
-<div class="painel-graficos" style="margin-top: 32px;">
+<div   class="painel-graficos" style="margin-top: 32px;display: none;">
   <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: flex-start;">
     <div class="painel-grafico-card" style="flex: 1 1 0; min-width: 0;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">

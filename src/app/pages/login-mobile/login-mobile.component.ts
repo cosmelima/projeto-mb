@@ -32,7 +32,7 @@ export class LoginMobileComponent {
         this.loading = false;
         localStorage.setItem('token', res.token);
         localStorage.setItem('usuario', JSON.stringify(res.usuario));
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/m/inicio']);
       },
       error: (err) => {
         this.loading = false;

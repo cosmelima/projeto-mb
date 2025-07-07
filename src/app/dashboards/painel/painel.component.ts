@@ -244,7 +244,10 @@ export class PainelComponent implements OnInit {
       try {
         const filtros = JSON.parse(filtrosSalvos);
         this.visaoSelecionada = filtros.visao_id || this.visaoSelecionada;
-        this.tipoSelecionado = filtros.tipo || this.tipoSelecionado;
+        // Converte o valor numérico do localStorage para string
+        if (filtros.tipo !== undefined) {
+          this.tipoSelecionado = filtros.tipo === 1 ? 'caixa' : 'competencia';
+        }
         this.dateStart = filtros.dataIni || this.dateStart;
         this.dateEnd = filtros.dataFim || this.dateEnd;
         this.empresaSelecionada = (filtros.empIds && filtros.empIds[0]) || '';
@@ -256,7 +259,7 @@ export class PainelComponent implements OnInit {
 
     this.filtros.dataIni = this.dateStart;
     this.filtros.dataFim = this.dateEnd;
-    this.filtros.tipo = this.tipoSelecionado;
+    this.filtros.tipo = this.tipoSelecionado === 'caixa' ? 1 : 2;
     this.filtros.visao_id = this.visaoSelecionada;
     this.filtros.empIds = this.empresaSelecionada ? [this.empresaSelecionada] : [];
     this.filtros.projIds = this.projetoSelecionado ? [this.projetoSelecionado] : [];
@@ -346,10 +349,13 @@ export class PainelComponent implements OnInit {
   }
 
   aplicarFiltros() {
+    // Converte o tipo para valor numérico para o backend
+    const tipoValue = this.tipoSelecionado === 'caixa' ? 1 : 2;
+    
     // Salva os filtros no localStorage
     const novoFiltro = {
       visao_id: this.visaoSelecionada,
-      tipo: this.tipoSelecionado,
+      tipo: tipoValue, // Envia o valor numérico para o backend
       dataIni: this.dateStart,
       dataFim: this.dateEnd,
       empIds: this.empresaSelecionada ? [this.empresaSelecionada] : [],
@@ -381,5 +387,16 @@ export class PainelComponent implements OnInit {
     this.visaoSelecionada = novaVisao;
     this.aplicarFiltros();
     
+  }
+
+  onTipoAnaliseChange(tipoValue: number) {
+    // Atualiza o tipo selecionado baseado no valor recebido
+    this.tipoSelecionado = tipoValue === 1 ? 'caixa' : 'competencia';
+    
+    // Atualiza o filtro com o valor numérico para o backend
+    this.filtros.tipo = tipoValue;
+    
+    // Atualiza os filtros e aplica
+    this.aplicarFiltros();
   }
 } 

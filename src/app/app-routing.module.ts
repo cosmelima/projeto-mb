@@ -38,8 +38,8 @@ const routes: Routes = [
     component: MobileLayoutComponent,
     canActivate: [MobileGuard],
     children: [
-      { path: 'inicio', component: HomeMobileComponent },
-      { path: 'financeiro', component: FinanceiroMobileComponent },
+      { path: 'm/inicio', component: HomeMobileComponent },
+      { path: 'm/financeiro', component: FinanceiroMobileComponent },
       // Adicione aqui outras rotas mobile específicas
     ]
   },

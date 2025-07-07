@@ -98,6 +98,7 @@ $font-principal: 'Poppins', 'Roboto', Arial, sans-serif;
   color: $branco;
   transition: background 0.2s, box-shadow 0.2s, border 0.2s;
   cursor: pointer;
+  border: 1.5px solid #3b5566;
   i {
     font-size: 2rem;
     margin-bottom: 8px;
@@ -106,14 +107,14 @@ $font-principal: 'Poppins', 'Roboto', Arial, sans-serif;
   &:hover {
     background: linear-gradient(120deg, #233e6e 0%, #1a2a4d 100%);
     box-shadow: 0 4px 16px rgba(26,119,212,0.16);
-    border: 1.5px solid $azul-claro;
+    border: 1.5px solid #3b5566;
   }
 }
 
 .featute-ativo {
   background: linear-gradient(120deg, #233e6e 0%, #1a2a4d 100%);
     box-shadow: 0 4px 16px rgba(26,119,212,0.16);
-    border: 1.5px solid $azul-claro;
+    border: 1.5px solid #3b5566;
 }
 
 .login-right {

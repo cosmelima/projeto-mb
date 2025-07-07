@@ -41,9 +41,12 @@ export class AuthInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           localStorage.removeItem('user'); // Remove também os dados do usuário se existirem
           
+          // Detecta tipo de dispositivo para redirecionar para a tela de login correta
+          const isMobile = /android|iphone|ipad|ipod|opera mini|iemobile|mobile/i.test(navigator.userAgent);
+          const loginRoute = isMobile ? '/m/login' : '/login';
           // Verifica se não está já na página de login para evitar loop
           if (!this.router.url.includes('/login')) {
-            this.router.navigate(['/login'], {
+            this.router.navigate([loginRoute], {
               queryParams: { returnUrl: this.router.url }
             });
           }
